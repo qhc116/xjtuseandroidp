@@ -10,6 +10,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var registerRouter = require('./routes/register');
 var testauthRouter = require('./routes/testauth');
+var loginRouter = require('./routes/login');
 
 var app = express();
 
@@ -25,7 +26,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(function (req, res, next) {
-  if(req.url != '/register'){
+  if(req.url != '/register' && req.url !='/login'){
       if(req.body.token==null){
         res.json({err:1,msg:'please login'})
       } else {
@@ -38,6 +39,7 @@ app.use(function (req, res, next) {
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/register', registerRouter);
+app.use('/login', loginRouter);
 app.use('/testauth', testauthRouter)
 
 // catch 404 and forward to error handler

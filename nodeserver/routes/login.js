@@ -5,11 +5,9 @@ var mongo = require('../mongo/MongoClient')
 
 /* GET users listing. */
 router.post('/', function(req, res, next) {
-    mongo.userRegister(req.body, function (info) {
+    mongo.userLogin(req.body, function (info) {
         res.json(info)
     })
 });
-
-
 
 module.exports = router;
