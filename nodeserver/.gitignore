@@ -14,6 +14,7 @@ pids
 # 依赖库
 node_modules/
 jspm_packages/
+package-lock.json
 
 # idea配置文件
 .idea
