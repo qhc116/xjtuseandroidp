@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.myapplication.LoginRegisterPage.MainActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="40dp"
+        android:paddingTop="50dp"
+        android:paddingRight="40dp">
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/looper_pager"
+            android:layout_width="350dp"
+            android:layout_height="350dp"
+            android:layout_marginTop="20dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentTop="true"
+            android:background="@color/colorBlue"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="5dp">
+            <!--标题-->
+            <TextView
+                android:id="@+id/tv_top_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="1"></TextView>
+        </LinearLayout>
+        <!--小圆点-->
+        <LinearLayout
+            android:id="@+id/points_container"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_alignBottom="@id/looper_pager"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/line1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/looper_pager"
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/mbtn_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/bg_button_1"
+                android:drawableLeft="@drawable/baidu_16px"
+                android:drawablePadding="10dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="10dp"
+                android:text="@string/baiDu_button"
+                android:textColor="#C5C4C4"
+                android:textSize="17dp"></Button>
+
+            <Button
+                android:id="@+id/mbtn_wechat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:background="@drawable/bg_button_2"
+                android:drawableLeft="@drawable/wechat_16px"
+                android:paddingLeft="10dp"
+                android:paddingRight="15dp"
+                android:text="@string/weChat_button"
+                android:textColor="#C5C4C4"
+                android:textSize="17dp"></Button>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/line2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/line1"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/iv_weBo"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginRight="40dp"
+                android:src="@drawable/weibo_48px"></ImageView>
+
+            <ImageView
+                android:id="@+id/iv_qq"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="50dp"
+                android:src="@drawable/qq_48px"></ImageView>
+        </LinearLayout>
+
+      <!--  <LinearLayout
+            android:id="@+id/line3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/line2"
+            android:layout_marginTop="20dp"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/mBtn_telephoneButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:text="@string/telephone_Button"
+                android:textSize="14dp"
+
+                ></Button>
+        </LinearLayout>-->
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:id="@+id/tv_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:gravity="center"
+                android:text="@string/tv_1"></TextView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_1"
+                android:layout_marginTop="10dp"
+                android:gravity="center_horizontal">
+
+                <TextView
+                    android:id="@+id/tv_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center"
+                    android:text="@string/tv_2"></TextView>
+
+                <TextView
+                    android:id="@+id/tv_policy1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="policy1"
+                    android:paddingLeft="5dp"
+                    android:text="@string/tv_policy1"
+                    android:textColor="@color/colorBlue"></TextView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="5dp"
+                    android:text="和"></TextView>
+
+                <TextView
+                    android:id="@+id/tv_policy2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="policy2"
+                    android:paddingLeft="5dp"
+                    android:text="@string/tv_policy2"
+                    android:textColor="@color/colorBlue"></TextView>
+            </LinearLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+</LinearLayout>
