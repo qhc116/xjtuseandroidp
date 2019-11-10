@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <!-- 选中时，小点为白色 -->
+        <item android:drawable="@drawable/shape_point_select" android:state_enabled="true"></item>
+        <!-- 未选中时，小点为透明色 -->
+        <item android:drawable="@drawable/shape_point_nomal" android:state_enabled="false"></item>
+</selector>
