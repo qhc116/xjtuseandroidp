@@ -340,6 +340,10 @@
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-2\\files-2.1\\f5bdf8930f5b0dade80802408310dda6\\appcompat-1.1.0\\res\\drawable-hdpi-v4\\abc_textfield_search_default_mtrl_alpha.9.png"
     },
     {
+        "merged": "E:\\code\\Android_learn\\front_end\\app\\build\\intermediates\\res\\merged\\debug\\layout_dialog_imageloading.xml.flat",
+        "source": "E:\\code\\Android_learn\\front_end\\app\\src\\main\\res\\layout\\dialog_imageloading.xml"
+    },
+    {
         "merged": "E:\\code\\Android_learn\\front_end\\app\\build\\intermediates\\res\\merged\\debug\\layout_abc_alert_dialog_button_bar_material.xml.flat",
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-2\\files-2.1\\f5bdf8930f5b0dade80802408310dda6\\appcompat-1.1.0\\res\\layout\\abc_alert_dialog_button_bar_material.xml"
     },
@@ -1258,6 +1262,10 @@
     {
         "merged": "E:\\code\\Android_learn\\front_end\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_abc_scrubber_track_mtrl_alpha.9.png.flat",
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-2\\files-2.1\\f5bdf8930f5b0dade80802408310dda6\\appcompat-1.1.0\\res\\drawable-mdpi-v4\\abc_scrubber_track_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "E:\\code\\Android_learn\\front_end\\app\\build\\intermediates\\res\\merged\\debug\\layout_imageshower.xml.flat",
+        "source": "E:\\code\\Android_learn\\front_end\\app\\src\\main\\res\\layout\\imageshower.xml"
     },
     {
         "merged": "E:\\code\\Android_learn\\front_end\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4_abc_ic_menu_cut_mtrl_alpha.png.flat",

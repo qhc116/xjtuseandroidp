@@ -14,6 +14,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -30,6 +32,7 @@ import java.io.InputStream;
 import android.util.Base64;
 
 import com.example.myapplication.SearchAllstar.PhotoActivity;
+import com.example.myapplication.utils.MarkFaces;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -39,6 +42,8 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+
+import static com.example.myapplication.utils.MarkFaces.markFaces;
 
 public class HomeActivity extends AppCompatActivity {
     private byte[] fileBuf;
@@ -54,6 +59,8 @@ public class HomeActivity extends AppCompatActivity {
 
     private boolean notRegister;
     private String token;
+    private Bitmap retBitmap;
+    private String resultJson;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,18 +130,28 @@ public class HomeActivity extends AppCompatActivity {
         try {
             InputStream inputStream = getContentResolver().openInputStream(uri);
             fileBuf=convertToBytes(inputStream);
-            base64_data = Base64.encodeToString(fileBuf, 0);
+
             //将字节数组写成位图显示
             Bitmap bitmap = BitmapFactory.decodeByteArray(fileBuf, 0, fileBuf.length);
             photo.setImageBitmap(bitmap);
+            //压缩后再上传
+            ByteArrayOutputStream bao = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG,20,bao);
+            fileBuf =  bao.toByteArray();
+
+            base64_data = Base64.encodeToString(fileBuf, 0);
+            Log.i("尺寸", "...."+base64_data.length()*2);
+
+            isWhichGroup(bitmap);
         } catch (Exception e) {
             e.printStackTrace();
         }
         cursor.close();
         //选择完图片后查询下是哪个组
-        isWhichGroup();
         Log.i("图片路径", "..."+uploadFileName);
     }
+
+
 
 
 
@@ -163,6 +180,7 @@ public class HomeActivity extends AppCompatActivity {
                         .addFormDataPart("filedata", base64_data)
                         .addFormDataPart("faceuser", faceUser)
                         .addFormDataPart("dateinfo", dateInfo)
+                        .addFormDataPart("resultJson", resultJson)
                         .addFormDataPart("token", token)
                         //filename:avatar,originname:abc.jpg
 //                        .addFormDataPart("avatar", uploadFileName, formBody)
@@ -175,11 +193,12 @@ public class HomeActivity extends AppCompatActivity {
 
                 try {
                     Response response = client.newCall(request).execute();
-                    JSONObject jsonObject = new JSONObject(response.body().string());
+
+//                    JSONObject jsonObject = new JSONObject(response.body().string());
 //                    JSONObject jsonObject1 = aip_client.detect(fileBuf);
 //                    isFace(jsonObject1);
-//                    Log.i("数据", response.body().string() + "....");
-                } catch (IOException | JSONException e) {
+                    Log.i("数据", response.body().string() + "....");
+                } catch (IOException e) {
                     e.printStackTrace();
                     Log.i("错误", "error");
                 }
@@ -231,12 +250,14 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
-    private void isWhichGroup() {
+    private void isWhichGroup(Bitmap bitmap) {
         new Thread() {
             @Override
             public void run() {
 
                 JSONObject jsonObject = aip_client.nMatch(base64_data);
+                resultJson = jsonObject.toString();
+//                Log.i("resultJson", "...."+resultJson);
 
                 try {
 
@@ -295,7 +316,7 @@ public class HomeActivity extends AppCompatActivity {
         }
     };
 
-    public void allstar(View view) {
+    public void allStar(View view) {
         Intent intent = new Intent(HomeActivity.this, PhotoActivity.class);
         startActivity(intent);
     }

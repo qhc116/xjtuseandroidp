@@ -11,6 +11,16 @@ public class PictureList {
     private String userField;
     private String id;
 
+    public String getResultJson() {
+        return resultJson;
+    }
+
+    public void setResultJson(String resultJson) {
+        this.resultJson = resultJson;
+    }
+
+    private String resultJson;
+
     public String getDateInfo() {
         return dateInfo;
     }

@@ -804,6 +804,7 @@ id always
 id async
 id barrier
 id beginning
+id bigiv
 id blocking
 id bottom
 id buttonPanel
@@ -900,6 +901,7 @@ id percent
 id photo
 id points_container
 id pr
+id progressBar1
 id progress_circular
 id progress_horizontal
 id radio
@@ -1029,7 +1031,9 @@ layout activity_yun_disk
 layout brvah_quick_view_load_more
 layout content_layout
 layout custom_dialog
+layout dialog_imageloading
 layout home_layout
+layout imageshower
 layout login_user
 layout notification_action
 layout notification_action_tombstone
@@ -1249,6 +1253,7 @@ style Base_Widget_AppCompat_TextView
 style Base_Widget_AppCompat_TextView_SpinnerItem
 style Base_Widget_AppCompat_Toolbar
 style Base_Widget_AppCompat_Toolbar_Button_Navigation
+style ImageloadingDialogStyle
 style Platform_AppCompat
 style Platform_AppCompat_Light
 style Platform_ThemeOverlay_AppCompat

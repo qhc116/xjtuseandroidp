@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:2:1-33:12
-INJECTED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:2:1-33:12
-INJECTED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:2:1-33:12
-INJECTED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:2:1-33:12
+ADDED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:2:1-37:12
+INJECTED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:2:1-37:12
+INJECTED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:2:1-37:12
+INJECTED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:2:1-37:12
 MERGED from [androidx.appcompat:appcompat:1.1.0] C:\Users\Administrator\.gradle\caches\transforms-2\files-2.1\f5bdf8930f5b0dade80802408310dda6\appcompat-1.1.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] C:\Users\Administrator\.gradle\caches\transforms-2\files-2.1\c1763829f79bc3811543d2bb9a22b866\constraintlayout-1.1.3\AndroidManifest.xml:2:1-11:12
 MERGED from [androidx.recyclerview:recyclerview:1.0.0] C:\Users\Administrator\.gradle\caches\transforms-2\files-2.1\99839343cfb353ec06147cc6109cf9b2\recyclerview-1.0.0\AndroidManifest.xml:17:1-22:12
@@ -38,20 +38,20 @@ MERGED from [androidx.print:print:1.0.0] C:\Users\Administrator\.gradle\caches\t
 MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\Administrator\.gradle\caches\transforms-2\files-2.1\e7284bace20bec096294b5474e153fbf\lifecycle-livedata-2.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\Administrator\.gradle\caches\transforms-2\files-2.1\c073c929da6ad4e112abaac7d3212747\lifecycle-livedata-core-2.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\Administrator\.gradle\caches\transforms-2\files-2.1\e72949b043b8df7a6068dab5e7cd21f2\core-runtime-2.0.0\AndroidManifest.xml:17:1-22:12
-INJECTED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:2:1-33:12
-INJECTED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:2:1-33:12
-INJECTED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:2:1-33:12
+INJECTED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:2:1-37:12
+INJECTED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:2:1-37:12
+INJECTED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:2:1-37:12
 	package
 		ADDED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:3:5-40
 		INJECTED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml
 		INJECTED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml
-		ADDED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:2:1-33:12
+		ADDED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:2:1-37:12
 		INJECTED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml
 	android:versionCode
 		INJECTED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml
-		ADDED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:2:1-33:12
+		ADDED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:2:1-37:12
 		INJECTED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:2:11-69
@@ -68,7 +68,7 @@ ADDED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:7:5-
 	android:name
 		ADDED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:7:22-76
 application
-ADDED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:9:5-31:19
+ADDED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:9:5-35:19
 MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] C:\Users\Administrator\.gradle\caches\transforms-2\files-2.1\c1763829f79bc3811543d2bb9a22b866\constraintlayout-1.1.3\AndroidManifest.xml:9:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] C:\Users\Administrator\.gradle\caches\transforms-2\files-2.1\c1763829f79bc3811543d2bb9a22b866\constraintlayout-1.1.3\AndroidManifest.xml:9:5-20
 MERGED from [com.github.bumptech.glide:glide:4.9.0] C:\Users\Administrator\.gradle\caches\transforms-2\files-2.1\672d648c70d135be357bce9916a3891f\jetified-glide-4.9.0\AndroidManifest.xml:10:5-20
@@ -82,55 +82,65 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\Ad
 	android:appComponentFactory
 		ADDED from [androidx.core:core:1.1.0] C:\Users\Administrator\.gradle\caches\transforms-2\files-2.1\7f6c41cc2a14c0fbaa8d0166c17dc544\core-1.1.0\AndroidManifest.xml:24:18-86
 	android:supportsRtl
-		ADDED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:14:9-35
+		ADDED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:15:9-35
 	android:label
-		ADDED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:12:9-41
+		ADDED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:13:9-41
 	android:roundIcon
-		ADDED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:13:9-54
+		ADDED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:14:9-54
 	android:icon
-		ADDED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:11:9-43
+		ADDED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:12:9-43
 	android:allowBackup
-		ADDED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:10:9-35
+		ADDED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:11:9-35
 	android:theme
-		ADDED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:15:9-40
+		ADDED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:16:9-40
 activity#com.example.myapplication.LoginRegisterPage.MainActivity
-ADDED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:16:9-22:20
+ADDED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:17:9-23:20
 	android:name
-		ADDED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:16:19-65
+		ADDED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:17:19-65
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:17:13-21:29
+ADDED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:18:13-22:29
 action#android.intent.action.MAIN
-ADDED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:18:17-69
+ADDED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:19:17-69
 	android:name
-		ADDED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:18:25-66
+		ADDED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:19:25-66
 category#android.intent.category.LAUNCHER
-ADDED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:20:17-77
+ADDED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:21:17-77
 	android:name
-		ADDED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:20:27-74
+		ADDED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:21:27-74
 activity#com.example.myapplication.YunDiskActivity
-ADDED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:23:9-53
+ADDED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:24:9-53
 	android:name
-		ADDED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:23:19-50
+		ADDED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:24:19-50
 activity#com.example.myapplication.HomeActivity
-ADDED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:24:9-50
+ADDED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:25:9-50
 	android:name
-		ADDED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:24:19-47
+		ADDED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:25:19-47
 activity#com.example.myapplication.LoginRegisterPage.RegisterActivity
-ADDED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:25:9-72
+ADDED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:26:9-72
 	android:name
-		ADDED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:25:19-69
+		ADDED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:26:19-69
 activity#com.example.myapplication.LoginRegisterPage.userLoginActivity
-ADDED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:26:9-73
+ADDED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:27:9-73
 	android:name
-		ADDED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:26:19-70
+		ADDED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:27:19-70
 activity#com.example.myapplication.SearchAllstar.ShowSearchActivity
-ADDED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:27:9-70
+ADDED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:28:9-70
 	android:name
-		ADDED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:27:19-67
+		ADDED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:28:19-67
 activity#com.example.myapplication.SearchAllstar.PhotoActivity
-ADDED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:28:9-65
+ADDED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:29:9-65
 	android:name
-		ADDED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:28:19-62
+		ADDED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:29:19-62
+activity#com.example.myapplication.ImageShower
+ADDED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:30:9-49
+	android:name
+		ADDED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:30:19-46
+provider#com.example.myapplication.ImageProvider
+ADDED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:31:9-33:15
+	android:authorities
+		ADDED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:32:13-57
+	android:name
+		ADDED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:31:19-47
 uses-sdk
 INJECTED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml

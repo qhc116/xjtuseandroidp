@@ -35,6 +35,7 @@ import com.example.myapplication.utils.MarkFaces;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.nio.ByteBuffer;
@@ -130,10 +131,12 @@ public class PhotoActivity extends AppCompatActivity {
 
     private void handleTakePhoto(Intent data) {
         bitmap = data.getParcelableExtra("data");
-        int bytes = bitmap.getByteCount();
-        ByteBuffer buffer = ByteBuffer.allocate(bytes);
-        bitmap.copyPixelsToBuffer(buffer); //Move the byte data to the buffer
-        fileBuf = buffer.array(); //Get the bytes array of the bitmap
+
+        ByteArrayOutputStream bao = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG,100,bao);
+        fileBuf =  bao.toByteArray();
+
+
         photo = findViewById(R.id.photo);
         photo.setImageBitmap(bitmap);
         Button bt = findViewById(R.id.upload);
@@ -200,7 +203,7 @@ public class PhotoActivity extends AppCompatActivity {
                 AipFace client = AipFaceHelper.getClient();
                 String image = Base64Util.encode(fileBuf);
                 String imageType = "BASE64";
-                String groupId = "allstar";
+                String groupId = "allStar";
                 JSONObject res = client.search(image, imageType, groupId, null);
                 Log.i("Tag", res.toString());
                 try {

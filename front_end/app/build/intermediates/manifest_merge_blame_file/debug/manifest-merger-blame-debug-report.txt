@@ -21,55 +21,65 @@
 13-->E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:7:22-76
 14
 15    <application
-15-->E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:9:5-31:19
+15-->E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:9:5-35:19
 16        android:allowBackup="true"
-16-->E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:10:9-35
+16-->E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:11:9-35
 17        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
 17-->[androidx.core:core:1.1.0] C:\Users\Administrator\.gradle\caches\transforms-2\files-2.1\7f6c41cc2a14c0fbaa8d0166c17dc544\core-1.1.0\AndroidManifest.xml:24:18-86
 18        android:debuggable="true"
 19        android:icon="@mipmap/ic_launcher"
-19-->E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:11:9-43
+19-->E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:12:9-43
 20        android:label="@string/app_name"
-20-->E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:12:9-41
+20-->E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:13:9-41
 21        android:roundIcon="@mipmap/ic_launcher_round"
-21-->E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:13:9-54
+21-->E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:14:9-54
 22        android:supportsRtl="true"
-22-->E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:14:9-35
+22-->E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:15:9-35
 23        android:testOnly="true"
 24        android:theme="@style/AppTheme" >
-24-->E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:15:9-40
+24-->E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:16:9-40
 25        <activity android:name="com.example.myapplication.LoginRegisterPage.MainActivity" >
-25-->E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:16:9-22:20
-25-->E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:16:19-65
+25-->E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:17:9-23:20
+25-->E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:17:19-65
 26            <intent-filter>
-26-->E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:17:13-21:29
+26-->E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:18:13-22:29
 27                <action android:name="android.intent.action.MAIN" />
-27-->E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:18:17-69
-27-->E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:18:25-66
+27-->E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:19:17-69
+27-->E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:19:25-66
 28
 29                <category android:name="android.intent.category.LAUNCHER" />
-29-->E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:20:17-77
-29-->E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:20:27-74
+29-->E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:21:17-77
+29-->E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:21:27-74
 30            </intent-filter>
 31        </activity>
 32        <activity android:name="com.example.myapplication.YunDiskActivity" />
-32-->E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:23:9-53
-32-->E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:23:19-50
+32-->E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:24:9-53
+32-->E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:24:19-50
 33        <activity android:name="com.example.myapplication.HomeActivity" />
-33-->E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:24:9-50
-33-->E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:24:19-47
+33-->E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:25:9-50
+33-->E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:25:19-47
 34        <activity android:name="com.example.myapplication.LoginRegisterPage.RegisterActivity" />
-34-->E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:25:9-72
-34-->E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:25:19-69
+34-->E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:26:9-72
+34-->E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:26:19-69
 35        <activity android:name="com.example.myapplication.LoginRegisterPage.userLoginActivity" />
-35-->E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:26:9-73
-35-->E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:26:19-70
+35-->E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:27:9-73
+35-->E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:27:19-70
 36        <activity android:name="com.example.myapplication.SearchAllstar.ShowSearchActivity" />
-36-->E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:27:9-70
-36-->E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:27:19-67
+36-->E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:28:9-70
+36-->E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:28:19-67
 37        <activity android:name="com.example.myapplication.SearchAllstar.PhotoActivity" />
-37-->E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:28:9-65
-37-->E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:28:19-62
-38    </application>
+37-->E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:29:9-65
+37-->E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:29:19-62
+38        <activity android:name="com.example.myapplication.ImageShower" />
+38-->E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:30:9-49
+38-->E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:30:19-46
 39
-40</manifest>
+40        <provider
+40-->E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:31:9-33:15
+41            android:name="com.example.myapplication.ImageProvider"
+41-->E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:31:19-47
+42            android:authorities="cn.drake.imageprovider" />
+42-->E:\code\Android_learn\front_end\app\src\main\AndroidManifest.xml:32:13-57
+43    </application>
+44
+45</manifest>

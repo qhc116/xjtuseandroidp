@@ -35,6 +35,11 @@
         <activity android:name="com.example.myapplication.LoginRegisterPage.userLoginActivity" />
         <activity android:name="com.example.myapplication.SearchAllstar.ShowSearchActivity" />
         <activity android:name="com.example.myapplication.SearchAllstar.PhotoActivity" />
+        <activity android:name="com.example.myapplication.ImageShower" />
+
+        <provider
+            android:name="com.example.myapplication.ImageProvider"
+            android:authorities="cn.drake.imageprovider" />
     </application>
 
 </manifest>

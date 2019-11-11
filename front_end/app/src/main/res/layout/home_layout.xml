@@ -11,31 +11,37 @@
             android:text="select"
             android:onClick="select"
             android:id="@+id/select"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="match_parent"/>
         <Button
             android:id="@+id/shot"
             android:text="Photo"
             android:onClick="shot"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="match_parent"/>
         <Button
             android:id="@+id/up"
             android:onClick="upload"
             android:text="upload"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="match_parent"/>
         <Button
             android:id="@+id/detect"
             android:onClick="toYunDisk"
             android:text="yundisk"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="match_parent"/>
+
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="newButton"
-            android:onClick="allstar"/>
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:onClick="allStar"
+            android:text="newButton" />
     </LinearLayout>
 
     <LinearLayout
@@ -46,6 +52,7 @@
             android:id="@+id/photo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
+
     </LinearLayout>
 
 </LinearLayout>

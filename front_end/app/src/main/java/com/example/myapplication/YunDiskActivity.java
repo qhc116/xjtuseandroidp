@@ -5,7 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.ContentResolver;
+import android.content.ContentValues;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -17,6 +22,8 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -67,6 +74,7 @@ public class YunDiskActivity extends AppCompatActivity {
 
     //控制两种排序网格布局中item的尺寸
     private List<Integer> faceGroupItemSize;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -143,6 +151,27 @@ public class YunDiskActivity extends AppCompatActivity {
                 //没有checkbox被勾选时退出多选状态
                 if(!mAdapter.hasItemSelected())
                     multiSelectStatus = false;
+            }else{
+                //非多选状态下点击放大图片
+                Intent intent = new Intent(YunDiskActivity.this, ImageShower.class);
+
+                Bitmap bitmap = pictureLists.get(position).getBitmap();
+//
+                ByteArrayOutputStream output = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.PNG, 20, output);
+                byte[] buf = output.toByteArray();
+//                intent.putExtra("bytes", buf);
+//                Log.i("尺寸", "...."+buf.length);
+                ContentValues values = new ContentValues();
+                values.put("data", Base64.encodeToString(buf, 0));
+                //通过resolver插入数据
+                ContentResolver resolver = getContentResolver();
+                Uri uri = Uri.parse("content://cn.drake.imageprovider/single");
+                //插入前先清除上一次的数据
+                resolver.delete(uri, "", new String[]{});
+                resolver.insert(uri, values);
+
+                startActivity(intent);
             }
         });
         
@@ -207,10 +236,13 @@ public class YunDiskActivity extends AppCompatActivity {
                     String faceUser = data.getString("user");
                     String id = data.getString("id");
                     String dateInfo = data.getString("date");
+                    String resultJson = data.getString("resultJson");
                     PictureList newPicture = new PictureList(buf);
                     newPicture.setUserField(faceUser);
                     newPicture.setId(id);
                     newPicture.setDateInfo(dateInfo);
+                    newPicture.setResultJson(resultJson);
+                    Log.i("resultJson", "...."+resultJson);
 
                     pictureLists.add(newPicture);
                     mAdapter.notifyItemInserted(pictureLists.size());
@@ -309,7 +341,10 @@ public class YunDiskActivity extends AppCompatActivity {
                         //获得base64
                         String data = jsonObject.getString("filedata");
 //                    Log.i(".......", data);
+                        //获取resultJson
 
+                        String resultJson = jsonObject.getString("resultJson");
+                        data1.putString("resultJson", resultJson);
                         data1.putString("value", data);
                         data1.putString("id", id);
                         data1.putString("user", faceUser);
@@ -499,5 +534,10 @@ public class YunDiskActivity extends AppCompatActivity {
 
     public void download(View view) {
 
+    }
+
+    public void toResult(View view) {
+        Intent intent = new Intent(YunDiskActivity.this, ResultActivity.class);
+        startActivity(intent);
     }
 }
