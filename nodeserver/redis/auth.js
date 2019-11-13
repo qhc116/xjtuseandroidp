@@ -20,7 +20,9 @@ let auth = function (token, res, next) {
                 res.json({err:1,msg:'invalide token,please login again!'})
             } else if(v == token){
                 client.expire(username,1800)
-                next()
+                if(req.url == '/auth') {
+                    res.json({err:0,msg:'auth access!'})
+                } else {next()}
             } else {
                 res.json({err:1,msg:'token expired,please login again!'})
             }
