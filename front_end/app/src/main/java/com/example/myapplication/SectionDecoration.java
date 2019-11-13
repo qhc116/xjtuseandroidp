@@ -42,7 +42,7 @@ public class SectionDecoration extends RecyclerView.ItemDecoration {
         this.callback = decorationCallback;
         //设置paint
         paint = new Paint();
-        paint.setColor(res.getColor(R.color.colorAccent));
+        paint.setColor(res.getColor(R.color.colorGrey));
         //设置textPaint
         textPaint = new TextPaint();
         textPaint.setTypeface(Typeface.DEFAULT);

@@ -10,6 +10,7 @@ public class PictureList {
     private Bitmap bitmap;
     private String userField;
     private String id;
+    private String resultJson;
 
     public String getResultJson() {
         return resultJson;
@@ -19,7 +20,7 @@ public class PictureList {
         this.resultJson = resultJson;
     }
 
-    private String resultJson;
+
 
     public String getDateInfo() {
         return dateInfo;

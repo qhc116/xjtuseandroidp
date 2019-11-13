@@ -7,6 +7,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -19,6 +20,7 @@ import android.os.Message;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -31,11 +33,19 @@ import java.io.IOException;
 import java.io.InputStream;
 import android.util.Base64;
 
+import com.baidu.aip.face.AipFace;
+import com.baidu.aip.util.Base64Util;
 import com.example.myapplication.SearchAllstar.PhotoActivity;
+import com.example.myapplication.SearchAllstar.ShowSearchActivity;
+import com.example.myapplication.utils.AipFaceHelper;
+import com.example.myapplication.utils.AipFaceUtils;
 import com.example.myapplication.utils.MarkFaces;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
@@ -46,6 +56,8 @@ import okhttp3.Response;
 import static com.example.myapplication.utils.MarkFaces.markFaces;
 
 public class HomeActivity extends AppCompatActivity {
+    private static final int UPLOAD = 2;
+
     private byte[] fileBuf;
     private String uploadFileName;
     private ImageView photo;
@@ -59,7 +71,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private boolean notRegister;
     private String token;
-    private Bitmap retBitmap;
+    private Bitmap bitmap;
     private String resultJson;
 
     @Override
@@ -79,6 +91,27 @@ public class HomeActivity extends AppCompatActivity {
         new Thread(getUserListLenth).start();
 
     }
+
+
+    Handler handler=new Handler(){
+        private static  final int SUCCESS=1;
+        private static  final int FAIL=0;
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case SUCCESS:
+                    photo = findViewById(R.id.photo);
+                    photo.setImageBitmap(bitmap);
+                    break;
+                case UPLOAD:
+                    isFace();
+                default:
+                    super.handleMessage(msg);
+            }
+        }
+    };
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -115,7 +148,36 @@ public class HomeActivity extends AppCompatActivity {
         switch (requestCode){
             case 1:
                 handleSelect(data);
+                break;
+            case 2:
+                if (resultCode == Activity.RESULT_OK  && data != null){
+                    handleTakePhoto(data);
+                } else if(resultCode == Activity.RESULT_CANCELED) {
+                    Toast.makeText(this,"您取消了拍照",Toast.LENGTH_SHORT).show();
+                }
         }
+    }
+
+    private void handleTakePhoto(Intent data) {
+        notRegister = false;
+        uploadFileName = "unknowuser";
+        bitmap = data.getParcelableExtra("data");
+
+        ByteArrayOutputStream bao = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG,50,bao);
+        photo.setImageBitmap(this.bitmap);
+
+        fileBuf =  bao.toByteArray();
+        base64_data = Base64.encodeToString(fileBuf, 0);
+//        bitmap = BitmapFactory.decodeByteArray(fileBuf, 0, fileBuf.length);
+//        photo = findViewById(R.id.photo);
+
+
+        isWhichGroup(bitmap);
+//        Button bt = findViewById(R.id.upload);
+//        bt.setVisibility(View.VISIBLE);
+//        bt = findViewById(R.id.searchAllStar);
+//        bt.setVisibility(View.VISIBLE);
     }
 
     private void handleSelect(Intent intent){
@@ -132,27 +194,23 @@ public class HomeActivity extends AppCompatActivity {
             fileBuf=convertToBytes(inputStream);
 
             //将字节数组写成位图显示
-            Bitmap bitmap = BitmapFactory.decodeByteArray(fileBuf, 0, fileBuf.length);
+            bitmap = BitmapFactory.decodeByteArray(fileBuf, 0, fileBuf.length);
             photo.setImageBitmap(bitmap);
             //压缩后再上传
             ByteArrayOutputStream bao = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG,20,bao);
+            bitmap.compress(Bitmap.CompressFormat.JPEG,50,bao);
             fileBuf =  bao.toByteArray();
 
             base64_data = Base64.encodeToString(fileBuf, 0);
             Log.i("尺寸", "...."+base64_data.length()*2);
-
+            //选择完图片后查询下是哪个组
             isWhichGroup(bitmap);
         } catch (Exception e) {
             e.printStackTrace();
         }
         cursor.close();
-        //选择完图片后查询下是哪个组
         Log.i("图片路径", "..."+uploadFileName);
     }
-
-
-
 
 
     public void upload(View view) throws JSONException {
@@ -193,11 +251,13 @@ public class HomeActivity extends AppCompatActivity {
 
                 try {
                     Response response = client.newCall(request).execute();
-
+                    Message msg = new Message();
+                    msg.what = UPLOAD;
+                    handler.sendMessage(msg);
 //                    JSONObject jsonObject = new JSONObject(response.body().string());
 //                    JSONObject jsonObject1 = aip_client.detect(fileBuf);
 //                    isFace(jsonObject1);
-                    Log.i("数据", response.body().string() + "....");
+//                    Log.i("数据", response.body().string() + "....");
                 } catch (IOException e) {
                     e.printStackTrace();
                     Log.i("错误", "error");
@@ -230,22 +290,17 @@ public class HomeActivity extends AppCompatActivity {
     }
     //未完成
     public void shot(View view) {
-        String[] permissions=new String[]{
-                Manifest.permission.CAMERA
-        };
-        if(ContextCompat.checkSelfPermission(this,Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(this,permissions,2);
-        }
-        else{
-            openGallery(); //打开相册，进行选择
-        }
+        Intent intent = new Intent();
+        intent.setAction("android.media.action.IMAGE_CAPTURE");
+        intent.addCategory(Intent.CATEGORY_DEFAULT);
+        startActivityForResult(intent, 2);
     }
 
     //解析返回结果
-    private void isFace(JSONObject jsonObject) throws JSONException {
-        String res = jsonObject.getString("error_msg");
+    private void isFace(){
+
         Toast.makeText(HomeActivity.this,
-                "尼刚刚上传了一张"+((jsonObject.getString("error_msg").equals("SUCCESS"))?"人脸":"普通")+"照片",
+                "尼刚刚上传了一张"+(faceUser.equals("notface")?"普通":"人脸")+"照片",
                 Toast.LENGTH_SHORT).show();
 
     }
@@ -319,5 +374,23 @@ public class HomeActivity extends AppCompatActivity {
     public void allStar(View view) {
         Intent intent = new Intent(HomeActivity.this, PhotoActivity.class);
         startActivity(intent);
+    }
+
+    public void searchAllStar(View view) {
+        new Thread(){
+            @Override
+            public void run() {
+                try {
+                    JSONObject jsonObject = AipFaceUtils.multiSearch(fileBuf);
+                    bitmap = MarkFaces.markFaces(jsonObject, bitmap);
+                    Log.d("TAG", "uploadImage: " + jsonObject);
+                    Message msg=new Message();
+                    msg.what=1;
+                    handler.sendMessage(msg);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
     }
 }

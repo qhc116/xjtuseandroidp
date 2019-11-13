@@ -21,8 +21,8 @@ public final class R {
     public static final class drawable {
         private drawable() {}
 
-        public static final int brvah_sample_footer_loading = 0x7f06005f;
-        public static final int brvah_sample_footer_loading_progress = 0x7f060060;
+        public static final int brvah_sample_footer_loading = 0x7f060060;
+        public static final int brvah_sample_footer_loading_progress = 0x7f060061;
     }
     public static final class id {
         private id() {}
@@ -31,24 +31,24 @@ public final class R {
         public static final int BaseQuickAdapter_dragging_support = 0x7f070002;
         public static final int BaseQuickAdapter_swiping_support = 0x7f070003;
         public static final int BaseQuickAdapter_viewholder_support = 0x7f070004;
-        public static final int load_more_load_end_view = 0x7f070082;
-        public static final int load_more_load_fail_view = 0x7f070083;
-        public static final int load_more_loading_view = 0x7f070084;
-        public static final int loading_progress = 0x7f070085;
-        public static final int loading_text = 0x7f070086;
-        public static final int tv_prompt = 0x7f0700ef;
+        public static final int load_more_load_end_view = 0x7f070087;
+        public static final int load_more_load_fail_view = 0x7f070088;
+        public static final int load_more_loading_view = 0x7f070089;
+        public static final int loading_progress = 0x7f07008a;
+        public static final int loading_text = 0x7f07008b;
+        public static final int tv_prompt = 0x7f0700f3;
     }
     public static final class layout {
         private layout() {}
 
-        public static final int brvah_quick_view_load_more = 0x7f0a0021;
+        public static final int brvah_quick_view_load_more = 0x7f0a0022;
     }
     public static final class string {
         private string() {}
 
-        public static final int brvah_app_name = 0x7f0c001f;
-        public static final int brvah_load_end = 0x7f0c0020;
-        public static final int brvah_load_failed = 0x7f0c0021;
-        public static final int brvah_loading = 0x7f0c0022;
+        public static final int brvah_app_name = 0x7f0d001f;
+        public static final int brvah_load_end = 0x7f0d0020;
+        public static final int brvah_load_failed = 0x7f0d0021;
+        public static final int brvah_loading = 0x7f0d0022;
     }
 }

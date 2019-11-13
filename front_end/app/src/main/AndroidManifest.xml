@@ -21,7 +21,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".YunDiskActivity" />
+        <activity android:name=".YunDiskActivity" >
+
+        </activity>
         <activity android:name=".HomeActivity" />
         <activity android:name=".LoginRegisterPage.RegisterActivity" />
         <activity android:name=".LoginRegisterPage.userLoginActivity" />

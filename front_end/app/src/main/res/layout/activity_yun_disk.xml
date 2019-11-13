@@ -8,42 +8,43 @@
     android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="请输入要搜索的人物"
-            android:onClick="toResult"
-            android:id="@+id/etx"/>
+            android:id="@+id/etx1"/>
+
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="正常布局"
-            android:onClick="resetLayout"
-            android:id="@+id/pr"/>
-        <Button
-            android:id="@+id/test1"
-            android:text="删除照片"
-            android:onClick="delete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <Button
-            android:id="@+id/test2"
-            android:text="时间排序"
-            android:onClick="sortByTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <Button
-            android:id="@+id/test3"
-            android:text="人脸排序"
-            android:onClick="sortByFace"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content">-->
+<!--        <Button-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="正常布局"-->
+<!--            android:onClick="resetLayout"-->
+<!--            android:id="@+id/pr"/>-->
+<!--        <Button-->
+<!--            android:id="@+id/test1"-->
+<!--            android:text="删除照片"-->
+<!--            android:onClick="delete"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"/>-->
+<!--        <Button-->
+<!--            android:id="@+id/test2"-->
+<!--            android:text="时间排序"-->
+<!--            android:onClick="sortByTime"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"/>-->
+<!--        <Button-->
+<!--            android:id="@+id/test3"-->
+<!--            android:text="人脸排序"-->
+<!--            android:onClick="sortByFace"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"/>-->
+<!--    </LinearLayout>-->
 
 
     <androidx.recyclerview.widget.RecyclerView

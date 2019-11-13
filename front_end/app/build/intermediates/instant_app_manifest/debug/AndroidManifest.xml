@@ -30,13 +30,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.myapplication.YunDiskActivity" />
+        <activity android:name="com.example.myapplication.YunDiskActivity" >
+        </activity>
         <activity android:name="com.example.myapplication.HomeActivity" />
         <activity android:name="com.example.myapplication.LoginRegisterPage.RegisterActivity" />
         <activity android:name="com.example.myapplication.LoginRegisterPage.userLoginActivity" />
         <activity android:name="com.example.myapplication.SearchAllstar.ShowSearchActivity" />
         <activity android:name="com.example.myapplication.SearchAllstar.PhotoActivity" />
         <activity android:name="com.example.myapplication.ImageShower" />
+        <activity android:name="com.example.myapplication.ResultActivity" />
 
         <provider
             android:name="com.example.myapplication.ImageProvider"

@@ -420,8 +420,11 @@ color button_material_light
 color colorAccent
 color colorBlack
 color colorBlue
+color colorBlue2
 color colorGray
 color colorGreen
+color colorGrey
+color colorGrey2
 color colorPrimary
 color colorPrimaryDark
 color colorRed
@@ -694,6 +697,7 @@ drawable bg_button_4
 drawable bg_button_register_false
 drawable bg_divider
 drawable bg_et
+drawable bg_searchview
 drawable brvah_sample_footer_loading
 drawable brvah_sample_footer_loading_progress
 drawable btn_checkbox_checked_mtrl
@@ -705,6 +709,7 @@ drawable btn_radio_off_mtrl
 drawable btn_radio_off_to_on_mtrl_animation
 drawable btn_radio_on_mtrl
 drawable btn_radio_on_to_off_mtrl_animation
+drawable deletebut
 drawable ic_launcher_background
 drawable ic_launcher_foreground
 drawable image1
@@ -712,6 +717,7 @@ drawable image2
 drawable image3
 drawable image4
 drawable image5
+drawable item_color
 drawable notification_action_background
 drawable notification_bg
 drawable notification_bg_low
@@ -726,6 +732,7 @@ drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
 drawable password_32px
 drawable qq_48px
+drawable search_24px
 drawable shape_point
 drawable shape_point_nomal
 drawable shape_point_select
@@ -800,6 +807,7 @@ id add
 id albumTv
 id alertTitle
 id all
+id allStar
 id always
 id async
 id barrier
@@ -825,6 +833,7 @@ id custom
 id customPanel
 id decor_content_parent
 id default_activity_button
+id deleteIv
 id detect
 id dialog_button
 id dimensions
@@ -834,6 +843,8 @@ id edit_query
 id end
 id et_1
 id et_2
+id etx
+id etx1
 id expand_activities_button
 id expanded_menu
 id fill
@@ -864,6 +875,7 @@ id line2
 id line3
 id listMode
 id list_item
+id ll
 id load_more_load_end_view
 id load_more_load_fail_view
 id load_more_loading_view
@@ -886,6 +898,7 @@ id no
 id noTv
 id none
 id normal
+id normalOrder
 id notification_background
 id notification_main_column
 id notification_main_column_container
@@ -900,7 +913,6 @@ id password_tv
 id percent
 id photo
 id points_container
-id pr
 id progressBar1
 id progress_circular
 id progress_horizontal
@@ -935,6 +947,8 @@ id shot
 id showCustom
 id showHome
 id showTitle
+id sortByface
+id sortBytime
 id spacer
 id split_action_bar
 id spread
@@ -956,9 +970,6 @@ id tag_transition_group
 id tag_unhandled_key_event_manager
 id tag_unhandled_key_listeners
 id targetImage
-id test1
-id test2
-id test3
 id text
 id text2
 id textSpacerNoButtons
@@ -1023,6 +1034,7 @@ layout abc_search_dropdown_item_icons_2line
 layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
+layout activity_container
 layout activity_login
 layout activity_photo
 layout activity_register
@@ -1042,10 +1054,14 @@ layout notification_template_icon_group
 layout notification_template_part_chronometer
 layout notification_template_part_time
 layout picture_layout
+layout result_image_layout
+layout result_layout
 layout select_dialog_item_material
 layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material
 layout support_simple_spinner_dropdown_item
+menu menu
+mipmap deletebut
 mipmap ic_launcher
 mipmap ic_launcher_round
 string PassWord

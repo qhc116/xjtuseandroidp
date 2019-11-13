@@ -16,15 +16,24 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Base64;
 import android.util.Log;
+import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.example.myapplication.ExplosionField.ExplosionField;
+import com.example.myapplication.utils.Base64Util;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -69,20 +78,27 @@ public class YunDiskActivity extends AppCompatActivity {
 
     private boolean multiSelectStatus;
     SharedPreferences mSharedPreferences;
-    private SharedPreferences.Editor editor;
     private String token;
 
     //控制两种排序网格布局中item的尺寸
     private List<Integer> faceGroupItemSize;
 
+    private EditText editText;
+
+    private ImageView deleteIv;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_yun_disk);
-        
+        setContentView(R.layout.activity_container);
+        ExplosionField explosionField = new ExplosionField(this);
+
+        explosionField.addListener(findViewById(R.id.rv));
         //成员初始化
         init();
+
+        setKeyListener();
         
         //进入时先从服务器请求文件名
         new Thread(FetchFileName).start();
@@ -149,8 +165,11 @@ public class YunDiskActivity extends AppCompatActivity {
 
                 adapter.notifyItemChanged(position);
                 //没有checkbox被勾选时退出多选状态
-                if(!mAdapter.hasItemSelected())
+                if(!mAdapter.hasItemSelected()){
                     multiSelectStatus = false;
+                    deleteIv.setVisibility(View.GONE);
+                }
+
             }else{
                 //非多选状态下点击放大图片
                 Intent intent = new Intent(YunDiskActivity.this, ImageShower.class);
@@ -179,10 +198,11 @@ public class YunDiskActivity extends AppCompatActivity {
         mAdapter.setOnItemLongClickListener((adapter, view, position) -> {
             //第一次长按激活勾选功能
             if(!multiSelectStatus){
+                deleteIv.setVisibility(View.VISIBLE);
                 mAdapter.setBooleanList(position, true);
 
                 adapter.notifyItemChanged(position);
-                Toast.makeText(YunDiskActivity.this, "长按了第" + (position + 1) + "条条目", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(YunDiskActivity.this, "长按了第" + (position + 1) + "条条目", Toast.LENGTH_SHORT).show();
                 //进入多选状态,单击可以勾选
                 multiSelectStatus = true;
             }
@@ -192,6 +212,8 @@ public class YunDiskActivity extends AppCompatActivity {
         //启动图片加载
         startLoading();
     }
+
+
     
     private void init(){
         filCount = 0;
@@ -210,7 +232,6 @@ public class YunDiskActivity extends AppCompatActivity {
         Log.i("token", "...."+token);
 
         mSharedPreferences = getSharedPreferences("data", 0);
-        editor = mSharedPreferences.edit();
         rv = findViewById(R.id.rv);
 
         faceGroupItemSize = new ArrayList<>();
@@ -218,6 +239,10 @@ public class YunDiskActivity extends AppCompatActivity {
         threadCanWork = true;
 
         sdf = new SimpleDateFormat("yyyy年MM月dd日");
+
+        editText = findViewById(R.id.etx);
+
+        deleteIv = findViewById(R.id.deleteIv);
         
         downloadUrl = "http://114.55.36.148:8000/download";
         filesUrl = "http://114.55.36.148:8000/files";
@@ -427,6 +452,7 @@ public class YunDiskActivity extends AppCompatActivity {
         //删除会导致退出多选状态
         if(!mAdapter.hasItemSelected())
             multiSelectStatus = false;
+            deleteIv.setVisibility(View.GONE);
 
         if(y == 0){
             Toast.makeText(YunDiskActivity.this, "没有要删除的元素", Toast.LENGTH_SHORT).show();
@@ -536,8 +562,124 @@ public class YunDiskActivity extends AppCompatActivity {
 
     }
 
+    private void setKeyListener(){
+
+        View.OnKeyListener onkey = new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if(keyCode == KeyEvent.KEYCODE_ENTER){
+                    toResult(v);
+                    return true;
+                }else{
+                    return false;
+                }
+
+            }
+        };
+        editText.setOnKeyListener(onkey);
+    }
+
     public void toResult(View view) {
+        EditText etx = findViewById(R.id.etx);
+        String query = etx.getEditableText().toString();
+        List<String> id_list = faceGroup2Id.get(query);
+        if(id_list == null){
+            Toast.makeText(YunDiskActivity.this,"您查询的人物不存在", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        //通过resolver插入数据
+        ContentResolver resolver = getContentResolver();
+        Uri uri = Uri.parse("content://cn.drake.imageprovider/multi");
+        //插入前先清除上一次的数据
+        resolver.delete(uri, "", new String[]{});
+        for(String id:id_list){
+            //获取临时图片资源
+            PictureList temp = pictureLists.get(Id2Pic.get(id));
+            ContentValues values = new ContentValues();
+
+            values.put("data", Base64Util.bitmapToBase64(temp.getBitmap()));
+            values.put("resultJson", temp.getResultJson());
+
+            resolver.insert(uri, values);
+        }
         Intent intent = new Intent(YunDiskActivity.this, ResultActivity.class);
+        intent.putExtra("query", query);
         startActivity(intent);
     }
+
+    @Override
+    //菜单结构的创建
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    //处理菜单点击事件
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int itemId = item.getItemId();
+        switch (itemId) {
+            //ListView部分
+            case R.id.sortByface:
+                Log.d("abc", "点击了ListView中的垂直标准");
+                sortByFace(rv);
+                break;
+            case R.id.sortBytime:
+                sortByTime(rv);
+                break;
+            case R.id.normalOrder:
+                resetLayout(rv);
+                break;
+//            case R.id.deletePic:
+//                delete(rv);
+//                break;
+            //GridView部分
+            case R.id.allStar:
+
+                break;
+//            case R.id.grid_view_vertical_reverse:
+//
+//                break;
+//            case R.id.grid_view_horizontal_stander:
+//
+//                break;
+//            case R.id.grid_view_horizontal_reverse:
+//
+//                break;
+//            //StaggerView部分
+//            case R.id.stagger_view_vertical_stander:
+//
+//                break;
+//            case R.id.stagger_view_vertical_reverse:
+//
+//                break;
+//            case R.id.stagger_view_horizontal_stander:
+//
+//                break;
+//            case R.id.stagger_view_horizontal_reverse:
+//
+//                break;
+           /* case R.id.icon_delete:
+                break;*/
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onMenuOpened(int featureId, Menu menu) {
+        if (menu != null) {
+            if (menu.getClass().getSimpleName().equalsIgnoreCase("MenuBuilder")) {
+                try {
+                    Method method = menu.getClass().getDeclaredMethod("setOptionalIconsVisible", Boolean.TYPE);
+                    method.setAccessible(true);
+                    method.invoke(menu, true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return super.onMenuOpened(featureId, menu);
+    }
+
 }

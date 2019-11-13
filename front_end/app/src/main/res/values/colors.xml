@@ -9,4 +9,7 @@
     <color name="colorGreen">#5EF81F</color>
     <color name="colorRed">#F81F26</color>
     <color name="colorGray">#3D3D3D</color>
+    <color name="colorGrey2">#E2E2E2</color>
+    <color name="colorBlue2">#3197FF</color>
+    <color name="colorGrey">#646161</color>
 </resources>

@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -15,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -95,9 +98,14 @@ public class RegisterActivity extends AppCompatActivity {
 
                                     if(err.equals("0")) {Intent intent=new Intent(RegisterActivity.this,MainActivity.class);
                                         startActivity(intent);
-                                    }else  System.out.println("用户名或密码错误");
-
-
+                                    }else    {
+                                        Message msg = new Message();
+                                        msg.what = 1;
+                                        Bundle bundle = new Bundle();
+                                        bundle.putString("ret", "用户信息已存在,请勿重新注册");
+                                        msg.setData(bundle);
+                                        handler.sendMessage(msg);
+                                    }
 
                                 } catch (IOException | JSONException e) {
                                     Log.e("err", e.toString());
@@ -108,10 +116,6 @@ public class RegisterActivity extends AppCompatActivity {
 
                     }.start();
                }
-
-
-                //写一个方法发送数据到后台*/
-
             }
         });
 
@@ -151,5 +155,20 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
+    Handler handler = new Handler() {
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                //处理图片新加入的更新
+                case 2:
+                    Bundle data = msg.getData();
+                    String toToast = data.getString("ret");
+                    Toast.makeText(RegisterActivity.this, toToast, Toast.LENGTH_SHORT).show();
+                case 3:
+            }
+        }
+
+    };
 }
 
