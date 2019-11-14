@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".SearchAllstar.ShowSearchActivity">
+
+    <TextView
+        android:id="@+id/like"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <ImageView
+            android:adjustViewBounds="true"
+            android:minHeight="250dp"
+            android:minWidth="250dp"
+            android:maxHeight="250dp"
+            android:maxWidth="250dp"
+            android:id="@+id/originalImage"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_gravity="center" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="和♂生猴子"
+            android:layout_margin="3dp"
+            android:layout_gravity="center"
+            android:onClick="getSon"/>
+        <ImageView
+            android:adjustViewBounds="true"
+            android:id="@+id/targetImage"
+            android:maxHeight="250dp"
+            android:maxWidth="250dp"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_gravity="center" />
+    </LinearLayout>
+</LinearLayout>

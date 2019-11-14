@@ -1,0 +1,89 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.myapplication"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="15"
+8-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="29" />
+9-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml
+10
+11    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+11-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:5:5-81
+11-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:5:22-78
+12    <uses-permission android:name="android.permission.INTERNET" />
+12-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:6:5-67
+12-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:6:22-64
+13    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+13-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:7:5-79
+13-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:7:22-76
+14
+15    <application
+15-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:9:5-39:19
+16        android:allowBackup="true"
+16-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:11:9-35
+17        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+17-->[androidx.core:core:1.1.0] C:\Users\Administrator\.gradle\caches\transforms-2\files-2.1\7f6c41cc2a14c0fbaa8d0166c17dc544\core-1.1.0\AndroidManifest.xml:24:18-86
+18        android:debuggable="true"
+19        android:icon="@mipmap/ic_launcher"
+19-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:12:9-43
+20        android:label="@string/app_name"
+20-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:13:9-41
+21        android:roundIcon="@mipmap/ic_launcher_round"
+21-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:14:9-54
+22        android:supportsRtl="true"
+22-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:15:9-35
+23        android:testOnly="true"
+24        android:theme="@style/AppTheme" >
+24-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:16:9-40
+25        <activity android:name="com.example.myapplication.LoginRegisterPage.MainActivity" >
+25-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:17:9-23:20
+25-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:17:19-65
+26            <intent-filter>
+26-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:18:13-22:29
+27                <action android:name="android.intent.action.MAIN" />
+27-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:19:17-69
+27-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:19:25-66
+28
+29                <category android:name="android.intent.category.LAUNCHER" />
+29-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:21:17-77
+29-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:21:27-74
+30            </intent-filter>
+31        </activity>
+32        <activity android:name="com.example.myapplication.YunDiskActivity" >
+32-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:24:9-26:20
+32-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:24:19-50
+33        </activity>
+34        <activity android:name="com.example.myapplication.HomeActivity" />
+34-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:27:9-50
+34-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:27:19-47
+35        <activity android:name="com.example.myapplication.LoginRegisterPage.RegisterActivity" />
+35-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:28:9-72
+35-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:28:19-69
+36        <activity android:name="com.example.myapplication.LoginRegisterPage.userLoginActivity" />
+36-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:29:9-73
+36-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:29:19-70
+37        <activity android:name="com.example.myapplication.SearchAllstar.ShowSearchActivity" />
+37-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:30:9-70
+37-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:30:19-67
+38        <activity android:name="com.example.myapplication.SearchAllstar.PhotoActivity" />
+38-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:31:9-65
+38-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:31:19-62
+39        <activity android:name="com.example.myapplication.ImageShower" />
+39-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:32:9-49
+39-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:32:19-46
+40        <activity android:name="com.example.myapplication.ResultActivity" />
+40-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:33:9-52
+40-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:33:19-49
+41
+42        <provider
+42-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:35:9-37:15
+43            android:name="com.example.myapplication.ImageProvider"
+43-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:35:19-47
+44            android:authorities="cn.drake.imageprovider" />
+44-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:36:13-57
+45    </application>
+46
+47</manifest>

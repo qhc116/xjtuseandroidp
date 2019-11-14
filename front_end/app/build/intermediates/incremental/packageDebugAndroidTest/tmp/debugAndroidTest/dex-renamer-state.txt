@@ -1,0 +1,4 @@
+#Sat Oct 26 09:01:02 CST 2019
+base.0=E\:\\code\\Android_learn\\Self\\app\\build\\intermediates\\dex\\debugAndroidTest\\mergeDexDebugAndroidTest\\out\\classes.dex
+path.0=classes.dex
+renamed.0=classes.dex

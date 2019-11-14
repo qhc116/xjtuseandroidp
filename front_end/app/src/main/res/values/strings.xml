@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="baiDu_button">账号密码登录</string>
+    <string name="weChat_button">人脸识别登录</string>
+    <string name="telephone_Button">手机号注册 </string>
+    <string name="tv_1">注册或登录代表您已阅读</string>
+    <string name="tv_2">并同意:百度网盘 </string>
+    <string name="tv_policy1">隐私协议 </string>
+    <string name="tv_policy2">用户协议 </string>
+
+    <string name="UserName">用户名</string>
+    <string name="PassWord">用户密码</string>
+</resources>
