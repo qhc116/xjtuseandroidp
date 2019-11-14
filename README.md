@@ -7,11 +7,14 @@
 
 
 ## 使用到的组件或技术
-轮播图、RecyclerView、百度SDK、SharePrefrernce、ContentProvider、OkHttp、Canvas、Decorator	
+四大组件：Activity、BroadcastReceiver、ContentProvider、Service
+轮播图、RecyclerView、百度SDK、SharePrefrernce、OkHttp、Canvas、Decorator	
 
 ## 登录注册
-- 使用OkHttp调用后端接口，完成登录、注册功能，并用SharePrefrernce存储用户登录状态以及用户信息
+- 使用OkHttp调用后端接口，完成登录、注册功能
 - 使用轮播图美化登录界面
+- 使用SharePrefrernce存储用户登录状态以及用户信息
+- 使用Service、BroadcastReceiver完成SSO登录
 
 ### 人脸识别
 - 使用OkHttp及百度SDK接口，完成人脸注册、人脸搜索功能
@@ -37,7 +40,7 @@ nodejs、exoress、multer、redis、JWT、mongodb
 - 使用express提供文件下载接口
 
 ## 安全策略
-- 路由前进行拦截，确认权限及用户身份
 - 使用JWT加密用户信息，完成用户身份的记载以及服务器认证
+- 路由前拦截访问请求，确认权限及用户身份
 - 使用redis配合JWT完成用户的单点登录及身份过期功能
 
