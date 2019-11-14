@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/sortByface"
+        android:title="人脸分组">
+    </item>
+    <item
+        android:id="@+id/sortBytime"
+        android:title="时间顺序">
+
+    </item>
+    <item
+        android:id="@+id/normalOrder"
+        android:title="正常模式">
+    </item>
+    <item
+        android:id="@+id/allStar"
+        android:title="全明星">
+    </item>
+</menu>
