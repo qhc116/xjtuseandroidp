@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\Administrator\\Desktop\\front_end1\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-en\\values-en.xml",
+            "outputFile": "C:\\Users\\86155\\Desktop\\workspace\\front_end\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-en\\values-en.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-2\\files-2.1\\87c496ed64cd02b3bdb18d88cd4d5438\\jetified-BaseRecyclerViewAdapterHelper-2.9.47\\res\\values-en\\values-en.xml",
+                    "source": "C:\\Users\\86155\\.gradle\\caches\\transforms-2\\files-2.1\\91b47f337d9877b5139d6ec47d5c5acf\\jetified-BaseRecyclerViewAdapterHelper-2.9.47\\res\\values-en\\values-en.xml",
                     "from": {
                         "startLines": "2,3,4",
                         "startColumns": "4,4,4",
