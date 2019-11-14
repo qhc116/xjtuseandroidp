@@ -29,14 +29,14 @@
 
 # 服务器端
 ## 使用到的组件或技术
-nodejs、exoress、multer、redis、JWT、mongodb
+nodejs、express、multer、redis、JWT、mongodb
 
 ## 登录注册
 - 使用express实现restful模式的用户登录注册功能
 - 使用mogodb存储用户账户密码以及人脸信息
 
 ## 文件上传下载
-- 使用exoress、multer和mongodb存储图片信息以及Base64格式的图片
+- 使用express、multer和mongodb存储图片信息以及Base64格式的图片
 - 使用express提供文件下载接口
 
 ## 安全策略
