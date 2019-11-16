@@ -92,10 +92,12 @@ class NameUtile
 
 ### PictureList
 - 图片相关数据存储
+
   ```
   class PictureList
   ```
 - 类属性:
+
 ```
     private Bitmap bitmap;//位图数据
     private String userField;//图片所属用户
@@ -104,6 +106,7 @@ class NameUtile
 	private Date dataInfo;//日期信息
 	```
 - 类方法
+
 ```
   public String getResultJson()
   public void setResultJson(String resultJson)
