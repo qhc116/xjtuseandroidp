@@ -52,7 +52,8 @@ nodejs、express、multer、redis、JWT、mongodb、crypto
 # 类设计
 
 ## 单例类
-- ```
+- 
+```
 class NameUtile
 ```
 
