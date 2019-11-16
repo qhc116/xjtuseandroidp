@@ -1,10 +1,5 @@
 package com.example.myapplication;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Intent;
@@ -16,6 +11,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Base64;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,9 +19,19 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.myapplication.ExplosionField.ExplosionField;
 import com.example.myapplication.utils.Base64Util;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,22 +44,26 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-import java.lang.Thread;
-import java.util.Map;
 
 
 public class YunDiskActivity extends AppCompatActivity {
+    private static final int DOWNLOAD_SUCCESS = 1;
+    private static final int DOWNLOAD_FINISH = 2;
 
     //从网络请求资源的id
     private List<String> filesId;
+    //图片的资源列表
     private List<PictureList> pictureLists;
     //记录id和图片资源位置的映射
     private HashMap<String, Integer> Id2Pic;
@@ -61,55 +71,123 @@ public class YunDiskActivity extends AppCompatActivity {
     private HashMap<String, Date> datesOrder;
     //记录人脸分组和图片id列表的映射
     private HashMap<String, List<String>> faceGroup2Id;
+
     private SimpleDateFormat sdf;
-
     private QuickAdapter mAdapter;
-
     private String downloadUrl;
     private String filesUrl;
-
     private RecyclerView rv;
-    private GridDividerItemDecoration splitDecoratio;
     private OkHttpClient client;
     private int filCount;
+    private EditText editText;
+    private ImageView deleteIv;
+    private String username;
+
+    //是否需要刷新
     private boolean needRefresh;
-
+    //控制同一时间只有一个线程在网络请求
     private boolean threadCanWork;
-
+    //图片的多选状态
     private boolean multiSelectStatus;
     SharedPreferences mSharedPreferences;
+
+    //用户登录的token信息
     private String token;
 
-    //控制两种排序网格布局中item的尺寸
+    //排序网格布局中item的尺寸
     private List<Integer> faceGroupItemSize;
 
-    private EditText editText;
-
-    private ImageView deleteIv;
-
+    private Toolbar toolbar;
+    private DrawerLayout drawerLayout;
+    private BottomNavigationView bottomNavigationView;
+    private NavigationView navigationView;
+    private ExplosionField explosionField;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_container);
-        ExplosionField explosionField = new ExplosionField(this);
+        setContentView(R.layout.new_yun_disk_activity);
 
-        explosionField.addListener(findViewById(R.id.rv));
         //成员初始化
         init();
+        initMenu();
 
+        //设置键盘响应
         setKeyListener();
-        
+
         //进入时先从服务器请求文件名
         new Thread(FetchFileName).start();
 
+        //设置适配器
+        initAdapter();
+
+        //启动图片加载
+        startLoading();
+
+        //设置元素删除动画
+        ExplosionField explosionField = new ExplosionField(this);
+        explosionField.addListener(findViewById(R.id.rv));
+    }
+
+
+    private void initMenu() {
+        toolbar = findViewById(R.id.yun_toolbar_tb);
+        drawerLayout = findViewById(R.id.yun_drawer_layout);
+        bottomNavigationView = findViewById(R.id.yun_nav_view);
+        navigationView = findViewById(R.id.yun_nav_left);
+
+        //点击开启侧滑菜单
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawerLayout.openDrawer(Gravity.LEFT);
+            }
+        });
+        //底部导航条的点击事件
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch (menuItem.getItemId()) {
+                    case R.id.sortByface:
+                        sortByFace(rv);
+                        break;
+                    case R.id.delete:
+                        delete(rv);
+                        break;
+                }
+                return true;
+            }
+        });
+
+        //侧滑菜单的点击事件
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch (menuItem.getItemId()) {
+                    case R.id.sortBytime:
+                        sortByTime(rv);
+                        break;
+                    case R.id.sortByface:
+                        sortByFace(rv);
+                        break;
+                    case R.id.normalOrder:
+                        resetLayout(rv);
+                        break;
+                    case R.id.menu_return:
+                        Intent intent = new Intent(YunDiskActivity.this, HomeActivity.class);
+                        startActivity(intent);
+                        break;
+                } return true;
+            }
+        });
+    }
+
+    private void initAdapter(){
         //创建适配器
-        //这里将要控制的布局和数据一起传入，内部控制holder的创建和绑定
         mAdapter = new QuickAdapter(R.layout.picture_layout, pictureLists);
 
         //创建布局管理
         GridLayoutManager manager = new GridLayoutManager(this, 4);
-        //当adapter被notify的时候布局管理器会自动检测每个单位应该设置的大小，也就是里面的逻辑并非一次性使用
         mAdapter.setSpanSizeLookup(new BaseQuickAdapter.SpanSizeLookup() {
             @Override
             public int getSpanSize(GridLayoutManager gridLayoutManager, int position) {
@@ -120,13 +198,11 @@ public class YunDiskActivity extends AppCompatActivity {
                     return faceGroupItemSize.get(position);
             }
         });
-//        LinearLayoutManager manager = new LinearLayoutManager(this);
         rv.setLayoutManager(manager);
         rv.setAdapter(mAdapter);
-
         rv.setTag("Normal");
 
-        //设置滚动预加载
+        //设置滚动加载
         rv.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
@@ -138,6 +214,7 @@ public class YunDiskActivity extends AppCompatActivity {
             }
         });
 
+        //添加装饰器，绘制排序的组别信息
         rv.addItemDecoration(new SectionDecoration(this, new SectionDecoration.DecorationCallback() {
             @Override
             public String getGroupUser(int position) {
@@ -149,72 +226,71 @@ public class YunDiskActivity extends AppCompatActivity {
                 return pictureLists.get(position).getDateInfo();
             }
         }));
-//        rv.addItemDecoration(new GridDividerItemDecoration(this, 20, 15, false));
 
         //开启动画
         mAdapter.openLoadAnimation();
 
         //给adapter添加事件控制
-        mAdapter.setOnItemClickListener((adapter, view, position) -> {
-            Toast.makeText(YunDiskActivity.this, "点击了第"+(position+1)+"张图片",
-                    Toast.LENGTH_SHORT).show();
-            if(multiSelectStatus){
-                //单击反转checkbox勾选状态
-                mAdapter.setBooleanList(position,
-                        !mAdapter.getBooleanList(position));
+        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Toast.makeText(YunDiskActivity.this, "点击了第" + (position + 1) + "张图片",
+                        Toast.LENGTH_SHORT).show();
+                if (multiSelectStatus) {
+                    //单击反转checkbox勾选状态
+                    mAdapter.setBooleanList(position,
+                            !mAdapter.getBooleanList(position));
 
-                adapter.notifyItemChanged(position);
-                //没有checkbox被勾选时退出多选状态
-                if(!mAdapter.hasItemSelected()){
-                    multiSelectStatus = false;
-                    deleteIv.setVisibility(View.GONE);
+                    adapter.notifyItemChanged(position);
+                    //没有checkbox被勾选时退出多选状态
+                    if (!mAdapter.hasItemSelected()) {
+                        multiSelectStatus = false;
+                        deleteIv.setVisibility(View.GONE);
+                    }
+
+                } else {
+                    //非多选状态下点击放大图片
+                    Intent intent = new Intent(YunDiskActivity.this, ImageShower.class);
+
+                    Bitmap bitmap = pictureLists.get(position).getBitmap();
+
+                    ByteArrayOutputStream output = new ByteArrayOutputStream();
+                    bitmap.compress(Bitmap.CompressFormat.PNG, 20, output);
+                    byte[] buf = output.toByteArray();
+
+                    ContentValues values = new ContentValues();
+                    values.put("data", Base64.encodeToString(buf, 0));
+                    //通过resolver插入数据
+                    ContentResolver resolver = YunDiskActivity.this.getContentResolver();
+                    Uri uri = Uri.parse("content://cn.drake.imageprovider/single");
+                    //插入前先清除上一次的数据
+                    resolver.delete(uri, "", new String[]{});
+                    resolver.insert(uri, values);
+
+                    YunDiskActivity.this.startActivity(intent);
                 }
-
-            }else{
-                //非多选状态下点击放大图片
-                Intent intent = new Intent(YunDiskActivity.this, ImageShower.class);
-
-                Bitmap bitmap = pictureLists.get(position).getBitmap();
-//
-                ByteArrayOutputStream output = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.PNG, 20, output);
-                byte[] buf = output.toByteArray();
-//                intent.putExtra("bytes", buf);
-//                Log.i("尺寸", "...."+buf.length);
-                ContentValues values = new ContentValues();
-                values.put("data", Base64.encodeToString(buf, 0));
-                //通过resolver插入数据
-                ContentResolver resolver = getContentResolver();
-                Uri uri = Uri.parse("content://cn.drake.imageprovider/single");
-                //插入前先清除上一次的数据
-                resolver.delete(uri, "", new String[]{});
-                resolver.insert(uri, values);
-
-                startActivity(intent);
             }
         });
-        
+
         //长按控制
-        mAdapter.setOnItemLongClickListener((adapter, view, position) -> {
-            //第一次长按激活勾选功能
-            if(!multiSelectStatus){
-                deleteIv.setVisibility(View.VISIBLE);
-                mAdapter.setBooleanList(position, true);
+        mAdapter.setOnItemLongClickListener(new BaseQuickAdapter.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(BaseQuickAdapter adapter, View view, int position) {
+                //第一次长按激活勾选功能
+                if (!multiSelectStatus) {
+                    deleteIv.setVisibility(View.VISIBLE);
+                    mAdapter.setBooleanList(position, true);
 
-                adapter.notifyItemChanged(position);
+                    adapter.notifyItemChanged(position);
 //                Toast.makeText(YunDiskActivity.this, "长按了第" + (position + 1) + "条条目", Toast.LENGTH_SHORT).show();
-                //进入多选状态,单击可以勾选
-                multiSelectStatus = true;
+                    //进入多选状态,单击可以勾选
+                    multiSelectStatus = true;
+                }
+                return false;
             }
-            return false;
         });
-
-        //启动图片加载
-        startLoading();
     }
 
-
-    
     private void init(){
         filCount = 0;
 
@@ -229,10 +305,10 @@ public class YunDiskActivity extends AppCompatActivity {
         multiSelectStatus = false;
 
         token = getIntent().getStringExtra("token");
-        Log.i("token", "...."+token);
+        Log.i("Get token", "...."+token);
 
         mSharedPreferences = getSharedPreferences("data", 0);
-        rv = findViewById(R.id.rv);
+        rv = (RecyclerView) findViewById(R.id.rv);
 
         faceGroupItemSize = new ArrayList<>();
 
@@ -240,22 +316,25 @@ public class YunDiskActivity extends AppCompatActivity {
 
         sdf = new SimpleDateFormat("yyyy年MM月dd日");
 
-        editText = findViewById(R.id.etx);
+        editText = (EditText) findViewById(R.id.etx);
 
-        deleteIv = findViewById(R.id.deleteIv);
-        
+        deleteIv = (ImageView) findViewById(R.id.deleteIv);
+
+        username = getIntent().getStringExtra("username");
+
         downloadUrl = "http://114.55.36.148:8000/download";
         filesUrl = "http://114.55.36.148:8000/files";
     }
 
-    //控制ui更新
+    /**
+     * 线程从服务器获得请求结果时更新UI
+     */
     Handler handler = new Handler(){
         @Override
         public void handleMessage(@NonNull Message msg) {
             super.handleMessage(msg);
             switch (msg.what){
-                //处理图片新加入的更新
-                case 1:
+                case DOWNLOAD_SUCCESS:
                     Bundle data = msg.getData();
                     byte[] buf = Base64.decode(data.getString("value"), 0);
                     String faceUser = data.getString("user");
@@ -267,14 +346,17 @@ public class YunDiskActivity extends AppCompatActivity {
                     newPicture.setId(id);
                     newPicture.setDateInfo(dateInfo);
                     newPicture.setResultJson(resultJson);
-                    Log.i("resultJson", "...."+resultJson);
+//                    Log.i("resultJson", "...."+resultJson);
 
                     pictureLists.add(newPicture);
                     mAdapter.notifyItemInserted(pictureLists.size());
-//                Log.i("数据更新", "......");
                     Id2Pic.put(id, pictureLists.size()-1);
                     break;
-                case 2:
+                    //modify
+                case DELETE_FAIL:
+                    String fileId = msg.getData().getString("id");
+                    Toast.makeText(YunDiskActivity.this, fileId+" 删除失败", Toast.LENGTH_LONG).show();
+                case DOWNLOAD_FINISH:
                     mAdapter.notifyDataSetChanged();
                     Log.i("刷新", "..............-----");
                     break;
@@ -282,7 +364,9 @@ public class YunDiskActivity extends AppCompatActivity {
         }
     };
 
-    //启动图片加载
+    /**
+     * 进入云相册时启动加载图片功能
+     */
     private void startLoading() {
         try {
             Thread.sleep(2000);
@@ -293,19 +377,19 @@ public class YunDiskActivity extends AppCompatActivity {
             for(int i = 0; i<filesId.size(); i++){
                 mAdapter.addBooleanList();
             }
-            Log.i("初始化bool值", "....."+mAdapter.getBooleanLenth());
+//            Log.i("初始化bool值", "....."+mAdapter.getBooleanLenth());
 
 
             new Thread(UpdatePicture).start();
         }
     }
 
-    //加载线程
-    //获取图片base64与其他信息在这里处理
+    /**
+     * 云相册中根据单个资源id，向服务器请求图片资源的Runnable对象
+     */
     Runnable UpdatePicture = new Runnable() {
         @Override
         public void run() {
-//            OkHttpClient client = new OkHttpClient();
             if (threadCanWork){
                 threadCanWork = false;
                 int loadNum = 9;
@@ -314,15 +398,15 @@ public class YunDiskActivity extends AppCompatActivity {
                     if(filCount>=filesId.size()){
                         if(needRefresh) {
                             Message msg = new Message();
-                            msg.what = 2;
+                            msg.what = DOWNLOAD_FINISH;
                             handler.sendMessage(msg);
                             needRefresh = false;
                         }
                         break;
                     }
                     faceGroupItemSize.add(1);
-//                Log.i("目前=", "...."+filCount);
                     String fileId = filesId.get(filCount);
+
                     RequestBody requestBody = new MultipartBody.Builder()
                             .setType(MultipartBody.FORM)
                             .addFormDataPart("id", fileId)
@@ -341,6 +425,7 @@ public class YunDiskActivity extends AppCompatActivity {
 
                         Message msg = new Message();
                         Bundle data1 = new Bundle();
+
                         //获取数据库中的id信息
                         String id = jsonObject.getString("_id");
                         //获得日期信息
@@ -348,7 +433,6 @@ public class YunDiskActivity extends AppCompatActivity {
                             Date dateInfo = sdf.parse(jsonObject.getString("dateinfo"));
                             datesOrder.put(id, dateInfo);
                             data1.putString("date", sdf.format(dateInfo));
-//                            Log.i("插入一条", "...时间记录"+dateInfo+":"+id);
                         } catch (ParseException e) {
                             e.printStackTrace();
                         }
@@ -365,16 +449,15 @@ public class YunDiskActivity extends AppCompatActivity {
                         }
                         //获得base64
                         String data = jsonObject.getString("filedata");
-//                    Log.i(".......", data);
                         //获取resultJson
-
                         String resultJson = jsonObject.getString("resultJson");
+
                         data1.putString("resultJson", resultJson);
                         data1.putString("value", data);
                         data1.putString("id", id);
                         data1.putString("user", faceUser);
 
-                        msg.what = 1;
+                        msg.what = DOWNLOAD_SUCCESS;
                         msg.setData(data1);
                         handler.sendMessage(msg);
                     } catch (IOException | JSONException e) {
@@ -388,11 +471,15 @@ public class YunDiskActivity extends AppCompatActivity {
         }
     };
 
+    /**
+     * 进入云相册时用于获取图片资源id的Runnable对象
+     */
     Runnable FetchFileName = new Runnable() {
         @Override
         public void run() {
             RequestBody requestBody = new MultipartBody.Builder()
                     .setType(MultipartBody.FORM)
+                    .addFormDataPart("username", username)
                     .addFormDataPart("token", token)
                     .build();
             Request request = new Request.Builder()
@@ -407,14 +494,53 @@ public class YunDiskActivity extends AppCompatActivity {
                     JSONObject jsonObject =new JSONObject(jsonArray.get(i).toString());
                     filesId.add(jsonObject.getString("_id"));
                 }
-//                filesName = Arrays.asList(data.substring(1, data.length()-1).split(","));
-//                Log.i("filenames", "........"+filesName);
+
             } catch (IOException | JSONException e) {
                 e.printStackTrace();
             }
         }
     };
+    //modify
+    Runnable DeleteFile = new Runnable() {
 
+        @Override
+        public void run() {
+            for(String fileId:DeleteFileList){
+                RequestBody requestBody = new MultipartBody.Builder()
+                        .setType(MultipartBody.FORM)
+                        .addFormDataPart("id", fileId)
+                        .addFormDataPart("token", token)
+                        .build();
+                Request request = new Request.Builder()
+                        .url(DeleteUrl)
+                        .post(requestBody)
+                        .build();
+
+                try {
+                    Response response = client.newCall(request).execute();
+                    JSONObject jsonObject = new JSONObject(response.body().string());
+                    String err = jsonObject.getString("err");
+
+                    if(err.equals("3")){
+                        Message msg = new Message();
+                        Bundle bundle = new Bundle();
+                        bundle.putString("id", fileId);
+                        msg.setData(bundle);
+                        msg.what = DELETE_FAIL;
+                        handler.sendMessage(msg);
+                    }
+                } catch (IOException | JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }
+    };
+
+    /**
+     * 通过重设每个图片在网格布局中所占格数来恢复普通布局
+     * @param view
+     */
     public void resetLayout(View view) {
         rv.setTag("Normal");
         faceGroupItemSize.clear();
@@ -423,8 +549,14 @@ public class YunDiskActivity extends AppCompatActivity {
         mAdapter.notifyDataSetChanged();
 
     }
+    //modify
+    private List<String> DeleteFileList;
+    private String DeleteUrl = "http://114.55.36.148:8000/delete";
+    private static final int DELETE_SUCCESS = 101;
+    private static final int DELETE_FAIL = 102;
 
     public void delete(View view) {
+        DeleteFileList = new ArrayList<>();
         int y = 0;
         int i = 0;
         while(i < mAdapter.getBooleanLenth()){
@@ -440,9 +572,14 @@ public class YunDiskActivity extends AppCompatActivity {
                 pictureLists.remove(i);
                 y++;
                 i--;
+                //modify
+                DeleteFileList.add(tempP.getId());
             }
             i++;
         }
+        //modify
+        new Thread(DeleteFile).start();
+
         mAdapter.notifyDataSetChanged();
         String tag =(String) rv.getTag();
         if(tag.equals("Face"))
@@ -452,13 +589,17 @@ public class YunDiskActivity extends AppCompatActivity {
         //删除会导致退出多选状态
         if(!mAdapter.hasItemSelected())
             multiSelectStatus = false;
-            deleteIv.setVisibility(View.GONE);
+        deleteIv.setVisibility(View.GONE);
 
         if(y == 0){
             Toast.makeText(YunDiskActivity.this, "没有要删除的元素", Toast.LENGTH_SHORT).show();
         }
     }
 
+    /**
+     * 删除图片时同步修改资源顺序
+     * @param id
+     */
     public void modifyId2Pic(String id){
         int indexCutLine = Id2Pic.get(id);
         Id2Pic.remove(id);
@@ -471,6 +612,11 @@ public class YunDiskActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * 依据图片的时间排序，并根据 (id, Date) 及(id, index)的映射重排资源顺序
+     * 再通过Adapter重新显示图片
+     * @param view
+     */
     public void sortByTime(View view) {
         rv.setTag("Time");
         faceGroupItemSize.clear();
@@ -478,7 +624,12 @@ public class YunDiskActivity extends AppCompatActivity {
         //按日期排序
         List<Map.Entry<String, Date>> list = new ArrayList<>(datesOrder.entrySet());
 //        Log.i("date与id", "....长"+list.size());
-        Collections.sort(list, (o1, o2) -> o1.getValue().compareTo(o2.getValue()));
+        Collections.sort(list, new Comparator<Map.Entry<String, Date>>() {
+            @Override
+            public int compare(Map.Entry<String, Date> o1, Map.Entry<String, Date> o2) {
+                return o1.getValue().compareTo(o2.getValue());
+            }
+        });
 
         //根据对应的id顺序调整资源顺序
         int startIndex = pictureLists.size();
@@ -518,6 +669,11 @@ public class YunDiskActivity extends AppCompatActivity {
         mAdapter.notifyDataSetChanged();
     }
 
+    /**
+     * 依据图片的人脸分组，并根据 (faceUser, id_list)的映射重排资源顺序
+     * 再通过Adapter重新显示图片
+     * @param view
+     */
     public void sortByFace(View view) {
         rv.setTag("Face");
         faceGroupItemSize.clear();
@@ -558,29 +714,31 @@ public class YunDiskActivity extends AppCompatActivity {
         mAdapter.notifyDataSetChanged();
     }
 
-    public void download(View view) {
 
-    }
-
+    /**
+     * 监听搜索栏的输入响应
+     */
     private void setKeyListener(){
 
-        View.OnKeyListener onkey = new View.OnKeyListener() {
+        View.OnKeyListener OnKey = new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if(keyCode == KeyEvent.KEYCODE_ENTER){
-                    toResult(v);
+                    toSearchResult(v);
                     return true;
-                }else{
+                }else
                     return false;
-                }
-
             }
         };
-        editText.setOnKeyListener(onkey);
+        editText.setOnKeyListener(OnKey);
     }
 
-    public void toResult(View view) {
-        EditText etx = findViewById(R.id.etx);
+    /**
+     * 搜索成功时跳转到结果页面
+     * @param view
+     */
+    public void toSearchResult(View view) {
+        EditText etx = (EditText) findViewById(R.id.etx);
         String query = etx.getEditableText().toString();
         List<String> id_list = faceGroup2Id.get(query);
         if(id_list == null){
@@ -607,15 +765,23 @@ public class YunDiskActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * 餐单结构的创建
+     * @param menu
+     * @return
+     */
     @Override
-    //菜单结构的创建
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
+    /**
+     * 处理菜单单击事件
+     * @param item
+     * @return
+     */
     @Override
-    //处理菜单点击事件
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int itemId = item.getItemId();
         switch (itemId) {
@@ -630,39 +796,10 @@ public class YunDiskActivity extends AppCompatActivity {
             case R.id.normalOrder:
                 resetLayout(rv);
                 break;
-//            case R.id.deletePic:
-//                delete(rv);
-//                break;
-            //GridView部分
             case R.id.allStar:
 
                 break;
-//            case R.id.grid_view_vertical_reverse:
-//
-//                break;
-//            case R.id.grid_view_horizontal_stander:
-//
-//                break;
-//            case R.id.grid_view_horizontal_reverse:
-//
-//                break;
-//            //StaggerView部分
-//            case R.id.stagger_view_vertical_stander:
-//
-//                break;
-//            case R.id.stagger_view_vertical_reverse:
-//
-//                break;
-//            case R.id.stagger_view_horizontal_stander:
-//
-//                break;
-//            case R.id.stagger_view_horizontal_reverse:
-//
-//                break;
-           /* case R.id.icon_delete:
-                break;*/
         }
-
         return super.onOptionsItemSelected(item);
     }
 

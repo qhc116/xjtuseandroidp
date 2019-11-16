@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--   ~ Copyright (C) 2017 Baidu, Inc. All Rights Reserved. -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.myapplication"
     android:targetSandboxVersion="2"
@@ -6,14 +7,27 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="15"
-        android:targetSdkVersion="29" />
+        android:minSdkVersion="21"
+        android:targetSdkVersion="25" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
+        android:name="com.baidu.aip.fl.DemoApplication"
         android:allowBackup="true"
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
         android:debuggable="true"
@@ -22,23 +36,42 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:testOnly="true"
-        android:theme="@style/AppTheme" >
-        <activity android:name="com.example.myapplication.LoginRegisterPage.MainActivity" >
+        android:theme="@style/Theme.AppCompat.Light" >
+        <activity
+            android:name="com.baidu.aip.fl.MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
+        </activity>
+        <activity
+            android:name="com.baidu.aip.fl.RegActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.baidu.aip.fl.VerifyLoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.baidu.aip.fl.DetectLoginActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name="com.baidu.aip.fl.LoginResultActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.baidu.aip.fl.FaceDetectActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name="com.example.myapplication.HomeActivity" />
+        <activity android:name="com.example.myapplication.ResultActivity" />
+        <activity android:name="com.example.myapplication.YunDiskActivity" />
+        <activity android:name="com.example.myapplication.LoginRegisterPage.RegisterActivity" />
+        <activity android:name="com.example.myapplication.LoginRegisterPage.userLoginActivity" />
+        <activity android:name="com.example.myapplication.LoginRegisterPage.FirstActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.myapplication.YunDiskActivity" >
-        </activity>
-        <activity android:name="com.example.myapplication.HomeActivity" />
-        <activity android:name="com.example.myapplication.LoginRegisterPage.RegisterActivity" />
-        <activity android:name="com.example.myapplication.LoginRegisterPage.userLoginActivity" />
-        <activity android:name="com.example.myapplication.SearchAllstar.ShowSearchActivity" />
-        <activity android:name="com.example.myapplication.SearchAllstar.PhotoActivity" />
-        <activity android:name="com.example.myapplication.ImageShower" />
-        <activity android:name="com.example.myapplication.ResultActivity" />
+        <activity android:name="com.example.myapplication.SearchAllstar.WebActivity" />
+        <activity android:name="com.example.myapplication.SearchAllstar.githubActivity" />
 
         <provider
             android:name="com.example.myapplication.ImageProvider"

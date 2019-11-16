@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <item
+            android:id="@+id/searchAllStar"
+            android:icon="@drawable/cartoons_32px"
+            android:checkable="true"
+            android:title="鬼畜全明星"></item>
+        <item
+            android:id="@+id/github"
+            android:icon="@drawable/github_32px"
+            android:checkable="true"
+            android:title="GitHub"></item>
+        <item
+            android:id="@+id/makeCertificationPhoto"
+            android:icon="@drawable/id_32pxt"
+            android:checkable="true"
+            android:title="制作证件照"></item>
+
+</menu>

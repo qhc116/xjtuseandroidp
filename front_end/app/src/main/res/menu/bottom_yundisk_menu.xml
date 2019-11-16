@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group
+        android:id="@+id/group_content"
+        android:checkable="true"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/picture"
+            android:icon="@drawable/picture_40px"
+            android:title="相册"
+            ></item>
+
+        <item
+            android:id="@+id/delete"
+            android:icon="@drawable/delete_32px"
+            android:title="删除"></item>
+    </group>
+</menu>

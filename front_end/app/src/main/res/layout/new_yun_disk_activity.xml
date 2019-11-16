@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/yun_drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.Toolbar
+
+                android:id="@+id/yun_toolbar_tb"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="#439DF0"
+                android:paddingLeft="10dp"
+                app:navigationIcon="@drawable/arrow_menu_32px"
+                app:title="我的相册"></androidx.appcompat.widget.Toolbar>
+            <EditText
+                android:id="@+id/etx"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/bg_searchview"
+                android:drawableLeft="@drawable/search_24px"
+                android:drawablePadding="10dp"
+                android:gravity="center_vertical"
+                android:hint="点击搜索"
+                android:paddingLeft="10dp" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp"
+                android:id="@+id/rv"
+                android:layout_below="@id/toolbar_tb" />
+        </LinearLayout>
+
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/yun_nav_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" android:background="@color/colorGrey2"
+        android:layout_gravity="center"
+        app:menu="@menu/bottom_yundisk_menu" />
+
+    </RelativeLayout>
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/yun_nav_left"
+        android:layout_width="200dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="left"
+        android:background="@color/colorWhite"
+        app:headerLayout="@layout/hear"
+
+        app:menu="@menu/left">
+        <!--    app:insetForeground="@android:color/transparent"-->
+
+    </com.google.android.material.navigation.NavigationView>
+
+</androidx.drawerlayout.widget.DrawerLayout>

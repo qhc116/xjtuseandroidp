@@ -1,18 +1,15 @@
 package com.example.myapplication.SearchAllstar;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.myapplication.R;
 import com.google.gson.Gson;
@@ -21,7 +18,6 @@ import com.google.gson.internal.LinkedTreeMap;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Map;
 
 import okhttp3.MultipartBody;
@@ -30,7 +26,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class ShowSearchActivity extends AppCompatActivity {
+public class ShowSearchActivity extends Activity {
 
     private static final String TAG = "TAG";
     Handler handler=new Handler(){

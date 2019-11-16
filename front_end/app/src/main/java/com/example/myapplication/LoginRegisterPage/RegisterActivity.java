@@ -1,7 +1,6 @@
 package com.example.myapplication.LoginRegisterPage;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -96,7 +95,7 @@ public class RegisterActivity extends AppCompatActivity {
                                     JSONObject jsonObject = new JSONObject(result); //获取Http响应报文的结果
                                     String err = jsonObject.getString("err");
 
-                                    if(err.equals("0")) {Intent intent=new Intent(RegisterActivity.this,MainActivity.class);
+                                    if(err.equals("0")) {Intent intent=new Intent(RegisterActivity.this, FirstActivity.class);
                                         startActivity(intent);
                                     }else    {
                                         Message msg = new Message();
@@ -155,6 +154,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
+
     Handler handler = new Handler() {
         @Override
         public void handleMessage(@NonNull Message msg) {
@@ -168,7 +168,6 @@ public class RegisterActivity extends AppCompatActivity {
                 case 3:
             }
         }
-
     };
 }
 

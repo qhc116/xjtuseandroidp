@@ -1,89 +1,161 @@
 1<?xml version="1.0" encoding="utf-8"?>
-2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-3    package="com.example.myapplication"
-4    android:versionCode="1"
-5    android:versionName="1.0" >
-6
-7    <uses-sdk
-8        android:minSdkVersion="15"
-8-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml
-9        android:targetSdkVersion="29" />
-9-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml
-10
-11    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-11-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:5:5-81
-11-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:5:22-78
-12    <uses-permission android:name="android.permission.INTERNET" />
-12-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:6:5-67
-12-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:6:22-64
-13    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-13-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:7:5-79
-13-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:7:22-76
-14
-15    <application
-15-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:9:5-39:19
-16        android:allowBackup="true"
-16-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:11:9-35
-17        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-17-->[androidx.core:core:1.1.0] C:\Users\Administrator\.gradle\caches\transforms-2\files-2.1\7f6c41cc2a14c0fbaa8d0166c17dc544\core-1.1.0\AndroidManifest.xml:24:18-86
-18        android:debuggable="true"
-19        android:icon="@mipmap/ic_launcher"
-19-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:12:9-43
-20        android:label="@string/app_name"
-20-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:13:9-41
-21        android:roundIcon="@mipmap/ic_launcher_round"
-21-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:14:9-54
-22        android:supportsRtl="true"
-22-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:15:9-35
-23        android:testOnly="true"
-24        android:theme="@style/AppTheme" >
-24-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:16:9-40
-25        <activity android:name="com.example.myapplication.LoginRegisterPage.MainActivity" >
-25-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:17:9-23:20
-25-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:17:19-65
-26            <intent-filter>
-26-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:18:13-22:29
-27                <action android:name="android.intent.action.MAIN" />
-27-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:19:17-69
-27-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:19:25-66
-28
-29                <category android:name="android.intent.category.LAUNCHER" />
-29-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:21:17-77
-29-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:21:27-74
-30            </intent-filter>
-31        </activity>
-32        <activity android:name="com.example.myapplication.YunDiskActivity" >
-32-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:24:9-26:20
-32-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:24:19-50
-33        </activity>
-34        <activity android:name="com.example.myapplication.HomeActivity" />
-34-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:27:9-50
-34-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:27:19-47
-35        <activity android:name="com.example.myapplication.LoginRegisterPage.RegisterActivity" />
-35-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:28:9-72
-35-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:28:19-69
-36        <activity android:name="com.example.myapplication.LoginRegisterPage.userLoginActivity" />
-36-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:29:9-73
-36-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:29:19-70
-37        <activity android:name="com.example.myapplication.SearchAllstar.ShowSearchActivity" />
-37-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:30:9-70
-37-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:30:19-67
-38        <activity android:name="com.example.myapplication.SearchAllstar.PhotoActivity" />
-38-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:31:9-65
-38-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:31:19-62
-39        <activity android:name="com.example.myapplication.ImageShower" />
-39-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:32:9-49
-39-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:32:19-46
-40        <activity android:name="com.example.myapplication.ResultActivity" />
-40-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:33:9-52
-40-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:33:19-49
-41
-42        <provider
-42-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:35:9-37:15
-43            android:name="com.example.myapplication.ImageProvider"
-43-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:35:19-47
-44            android:authorities="cn.drake.imageprovider" />
-44-->C:\Users\Administrator\Desktop\front_end1\app\src\main\AndroidManifest.xml:36:13-57
-45    </application>
-46
-47</manifest>
+2<!--   ~ Copyright (C) 2017 Baidu, Inc. All Rights Reserved. -->
+3<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+4    package="com.example.myapplication"
+5    android:versionCode="1"
+6    android:versionName="1.0" >
+7
+8    <uses-sdk
+9        android:minSdkVersion="21"
+9-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml
+10        android:targetSdkVersion="25" />
+10-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml
+11
+12    <uses-permission android:name="android.permission.CAMERA" />
+12-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:7:5-65
+12-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:7:22-62
+13    <uses-permission android:name="android.permission.INTERNET" />
+13-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:8:5-67
+13-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:8:22-64
+14    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+14-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:9:5-80
+14-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:9:22-77
+15    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+15-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:10:5-81
+15-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:10:22-78
+16
+17    <uses-feature android:name="android.hardware.camera" />
+17-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:12:5-60
+17-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:12:19-57
+18    <uses-feature android:name="android.hardware.camera.autofocus" />
+18-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:13:5-70
+18-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:13:19-67
+19
+20    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+20-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:10:5-81
+20-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:10:22-78
+21    <uses-permission android:name="android.permission.INTERNET" />
+21-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:8:5-67
+21-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:8:22-64
+22    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+22-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:17:5-76
+22-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:17:22-73
+23    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+23-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:18:5-75
+23-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:18:22-72
+24    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+24-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:19:5-79
+24-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:19:22-76
+25    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+25-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:17:5-76
+25-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:17:22-73
+26    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+26-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:18:5-75
+26-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:18:22-72
+27
+28    <application
+28-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:24:5-72:19
+29        android:name="com.baidu.aip.fl.DemoApplication"
+29-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:25:9-56
+30        android:allowBackup="true"
+30-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:26:9-35
+31        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+31-->[androidx.core:core:1.0.0] C:\Users\Administrator\.gradle\caches\transforms-2\files-2.1\4de34232979cbe134bd28b81339a3afe\core-1.0.0\AndroidManifest.xml:22:18-86
+32        android:debuggable="true"
+33        android:icon="@mipmap/ic_launcher"
+33-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:27:9-43
+34        android:label="@string/app_name"
+34-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:28:9-41
+35        android:roundIcon="@mipmap/ic_launcher_round"
+35-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:29:9-54
+36        android:supportsRtl="true"
+36-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:30:9-35
+37        android:testOnly="true"
+38        android:theme="@style/Theme.AppCompat.Light" >
+38-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:31:9-53
+39        <activity
+39-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:32:9-37:20
+40            android:name="com.baidu.aip.fl.MainActivity"
+40-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:33:13-57
+41            android:screenOrientation="portrait"
+41-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:34:13-49
+42            android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
+42-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:35:13-69
+43        </activity>
+44        <activity
+44-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:38:9-40:52
+45            android:name="com.baidu.aip.fl.RegActivity"
+45-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:39:13-56
+46            android:screenOrientation="portrait" />
+46-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:40:13-49
+47        <activity
+47-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:42:9-44:52
+48            android:name="com.baidu.aip.fl.VerifyLoginActivity"
+48-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:43:13-64
+49            android:screenOrientation="portrait" />
+49-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:44:13-49
+50        <activity
+50-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:45:9-48:72
+51            android:name="com.baidu.aip.fl.DetectLoginActivity"
+51-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:46:13-64
+52            android:screenOrientation="portrait"
+52-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:47:13-49
+53            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+53-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:48:13-69
+54        <activity
+54-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:49:9-51:52
+55            android:name="com.baidu.aip.fl.LoginResultActivity"
+55-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:50:13-64
+56            android:screenOrientation="portrait" />
+56-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:51:13-49
+57        <activity
+57-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:52:9-54:52
+58            android:name="com.baidu.aip.fl.FaceDetectActivity"
+58-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:53:13-63
+59            android:screenOrientation="portrait" />
+59-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:54:13-49
+60        <activity android:name="com.example.myapplication.HomeActivity" />
+60-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:55:9-50
+60-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:55:19-47
+61        <activity android:name="com.example.myapplication.ResultActivity" />
+61-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:56:9-52
+61-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:56:19-49
+62        <activity android:name="com.example.myapplication.YunDiskActivity" />
+62-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:57:9-53
+62-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:57:19-50
+63        <activity android:name="com.example.myapplication.LoginRegisterPage.RegisterActivity" />
+63-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:58:9-72
+63-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:58:19-69
+64        <activity android:name="com.example.myapplication.LoginRegisterPage.userLoginActivity" />
+64-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:59:9-73
+64-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:59:19-70
+65        <activity android:name="com.example.myapplication.LoginRegisterPage.FirstActivity" >
+65-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:60:9-65:20
+65-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:60:19-66
+66            <intent-filter>
+66-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:61:13-64:29
+67                <action android:name="android.intent.action.MAIN" />
+67-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:62:17-69
+67-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:62:25-66
+68
+69                <category android:name="android.intent.category.LAUNCHER" />
+69-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:63:17-77
+69-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:63:27-74
+70            </intent-filter>
+71        </activity>
+72        <activity android:name="com.example.myapplication.SearchAllstar.WebActivity" />
+72-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:66:9-63
+72-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:66:19-60
+73        <activity android:name="com.example.myapplication.SearchAllstar.githubActivity" />
+73-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:67:9-66
+73-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:67:19-63
+74
+75        <provider
+75-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:69:9-70:60
+76            android:name="com.example.myapplication.ImageProvider"
+76-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:69:19-48
+77            android:authorities="cn.drake.imageprovider" />
+77-->C:\Users\Administrator\Desktop\FaceLogin-Sample-Android\app\src\main\AndroidManifest.xml:70:13-57
+78    </application>
+79
+80</manifest>

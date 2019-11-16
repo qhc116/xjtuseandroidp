@@ -1,0 +1,35 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group
+        android:id="@+id/group_content"
+        android:checkableBehavior="single"
+        android:checkable="true">
+        <item
+            android:id="@+id/sortBytime"
+            android:icon="@drawable/sort_time_32px"
+            android:title="时间排序"
+            android:checkable="true"/>
+        <item
+            android:id="@+id/sortByface"
+            android:icon="@drawable/sort_32px"
+            android:title="人脸排序"
+            android:checkable="true"/>
+    </group>
+
+    <group
+        android:id="@+id/group_person"
+        android:checkableBehavior="single"
+        android:checkable="true"
+        >
+        <item
+            android:id="@+id/normalOrder"
+            android:icon="@drawable/picture_32px"
+            android:title="正常排序"
+            android:checkable="true"/>
+
+        <item
+            android:id="@+id/menu_return"
+            android:icon="@drawable/arrows_32px"
+            android:title="返回上一级"
+            android:checkable="true"/>
+    </group>
+</menu>

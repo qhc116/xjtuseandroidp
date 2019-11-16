@@ -6,11 +6,11 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.Log;
 
-
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.HashMap;
 
 public class MarkFaces {
     public static Bitmap markFaces(JSONObject jsonObject,Bitmap bitmap){
@@ -36,6 +36,10 @@ public class MarkFaces {
                 String name = ((JSONObject) ((JSONObject) jsonArray.get(i)).getJSONArray("user_list").get(0)).getString("user_id");
                 //JSONArray name = ((JSONArray) jsonArray.get(i)).getJSONObject("user_list");
                 //Canvas canvas = new Canvas(imageBitmap);
+                HashMap hashMap = NameUtile.getHashMap();
+                if(hashMap.get(name)!=null){
+                    name = (String) hashMap.get(name);
+                }
                 Paint paint = new Paint();
                 left = ((Double) location.get("left")).intValue();
                 top = ((Double) location.get("top")).intValue();

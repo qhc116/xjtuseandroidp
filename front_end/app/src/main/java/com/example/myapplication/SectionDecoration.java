@@ -1,7 +1,6 @@
 package com.example.myapplication;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -102,9 +101,9 @@ public class SectionDecoration extends RecyclerView.ItemDecoration {
             if (groupId.isEmpty() || groupId.equals(preGroupId)) continue;
             //不同排序使用不同的标题显示，刚进入时不绘制任何标题
             if(StatusTag.equals("Face"))
-                textLine = callback.getGroupUser(position).toUpperCase();
+                textLine = callback.getGroupUser(position);
             else if (StatusTag.equals("Time"))
-                textLine = callback.getGroupDate(position).toUpperCase();
+                textLine = callback.getGroupDate(position);
             else
                 continue;
             if (TextUtils.isEmpty(textLine)) continue;

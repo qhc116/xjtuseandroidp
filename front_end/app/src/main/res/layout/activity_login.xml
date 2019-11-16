@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.myapplication.LoginRegisterPage.MainActivity">
+    tools:context="com.example.myapplication.LoginRegisterPage.FirstActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -77,6 +77,7 @@
                 android:drawableLeft="@drawable/wechat_16px"
                 android:paddingLeft="10dp"
                 android:paddingRight="15dp"
+                android:onClick="FaceLogin"
                 android:text="@string/weChat_button"
                 android:textColor="#C5C4C4"
                 android:textSize="17dp"></Button>

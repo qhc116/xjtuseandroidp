@@ -1,4 +1,10 @@
-#Thu Nov 14 20:16:11 CST 2019
-base.0=C\:\\Users\\Administrator\\Desktop\\front_end1\\app\\build\\intermediates\\dex\\debug\\mergeDexDebug\\out\\classes.dex
+#Sat Nov 16 23:00:13 CST 2019
+path.2=classes_0.dex
+path.1=classes.dex
 path.0=classes.dex
+renamed.2=classes3.dex
+renamed.1=classes2.dex
 renamed.0=classes.dex
+base.2=C\:\\Users\\Administrator\\Desktop\\FaceLogin-Sample-Android\\app\\build\\intermediates\\dex\\debug\\mergeLibDexDebug\\out\\classes_0.dex
+base.1=C\:\\Users\\Administrator\\Desktop\\FaceLogin-Sample-Android\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\out\\classes.dex
+base.0=C\:\\Users\\Administrator\\Desktop\\FaceLogin-Sample-Android\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\out\\classes.dex

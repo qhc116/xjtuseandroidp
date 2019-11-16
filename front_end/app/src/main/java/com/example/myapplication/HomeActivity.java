@@ -1,11 +1,5 @@
 package com.example.myapplication;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
@@ -18,11 +12,30 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+
+import com.example.myapplication.SearchAllstar.WebActivity;
+import com.example.myapplication.SearchAllstar.githubActivity;
+import com.example.myapplication.utils.AipBodyUtils;
+import com.example.myapplication.utils.AipFaceUtils;
+import com.example.myapplication.utils.MarkFaces;
+import com.example.myapplication.utils.NameUtile;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,29 +44,15 @@ import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import android.util.Base64;
-
-import com.baidu.aip.face.AipFace;
-import com.baidu.aip.util.Base64Util;
-import com.example.myapplication.SearchAllstar.PhotoActivity;
-import com.example.myapplication.SearchAllstar.ShowSearchActivity;
-import com.example.myapplication.utils.AipFaceHelper;
-import com.example.myapplication.utils.AipFaceUtils;
-import com.example.myapplication.utils.MarkFaces;
-
-import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Map;
 
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-
-import static com.example.myapplication.utils.MarkFaces.markFaces;
 
 public class HomeActivity extends AppCompatActivity {
     private static final int UPLOAD = 2;
@@ -73,25 +72,99 @@ public class HomeActivity extends AppCompatActivity {
     private String token;
     private Bitmap bitmap;
     private String resultJson;
+    private String username;
+    private HashMap nameMap = NameUtile.getHashMap();
+    private JSONObject name;
+
+    private Toolbar toolbar;
+    private DrawerLayout drawerLayout;
+    private BottomNavigationView bottomNavigationView;
+    private NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.home_layout);
+        setContentView(R.layout.activity_new_home);
 
         photo=findViewById(R.id.photo);
         token = getIntent().getStringExtra("token");
         Log.i("token", "...."+token);
 
-
+        username = getIntent().getStringExtra("username");
+        Log.i("用户名", "--------"+username);
         aip_client = new Aip_faceDetect();
         faceUser = "";
         userListLenth = 0;
         notRegister = false;
-        new Thread(getUserListLenth).start();
 
+        initData();
+        new Thread(getUserListLenth).start();
     }
 
+
+    private void initData() {
+        toolbar = findViewById(R.id.toolbar_tb);
+        drawerLayout = findViewById(R.id.drawer_layout);
+        bottomNavigationView = findViewById(R.id.nav_view);
+        navigationView = findViewById(R.id.nav_left);
+
+        navigationView.setItemIconTintList(null);
+        //点击开启侧滑菜单
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawerLayout.openDrawer(Gravity.LEFT);
+            }
+        });
+        //底部导航条的点击事件
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch (menuItem.getItemId()) {
+                    case R.id.searchAllStar:
+                        searchAllStar(photo);
+                        break;
+                    case R.id.makeCertificationPhoto:
+                        makeCertificationPhoto(photo);
+                        break;
+                    case R.id.github:
+                        Intent intent=new Intent(HomeActivity.this, githubActivity.class);
+                        startActivity(intent);
+
+                        break;
+                }
+                return true;
+            }
+        });
+
+        //侧滑菜单的点击事件
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch (menuItem.getItemId()){
+                    case R.id.select:
+                        select(photo);
+                        break;
+                    case R.id.shot:
+                        shot(photo);
+                        break;
+                    case R.id.up:
+                        try {
+                            upload(photo);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        break;
+                    case R.id.detect:
+                        toYunDisk(photo);
+                        break;
+                    case R.id.more:
+                        allStar(photo);
+                        break;
+                }  return true;
+            }
+        });
+    }
 
     Handler handler=new Handler(){
         private static  final int SUCCESS=1;
@@ -212,8 +285,11 @@ public class HomeActivity extends AppCompatActivity {
         Log.i("图片路径", "..."+uploadFileName);
     }
 
-
     public void upload(View view) throws JSONException {
+        if(base64_data.isEmpty()){
+            Toast.makeText(HomeActivity.this, "请先选择照片再上传", Toast.LENGTH_LONG).show();
+            return;
+        }
         new Thread() {
             @Override
             public void run() {
@@ -239,6 +315,7 @@ public class HomeActivity extends AppCompatActivity {
                         .addFormDataPart("faceuser", faceUser)
                         .addFormDataPart("dateinfo", dateInfo)
                         .addFormDataPart("resultJson", resultJson)
+                        .addFormDataPart("username", username)
                         .addFormDataPart("token", token)
                         //filename:avatar,originname:abc.jpg
 //                        .addFormDataPart("avatar", uploadFileName, formBody)
@@ -353,6 +430,7 @@ public class HomeActivity extends AppCompatActivity {
             public void run() {
                 Intent intent = new Intent(HomeActivity.this, YunDiskActivity.class);
                 intent.putExtra("token", token);
+                intent.putExtra("username", username);
                 startActivity(intent);
             }
         }.start();
@@ -372,7 +450,23 @@ public class HomeActivity extends AppCompatActivity {
     };
 
     public void allStar(View view) {
-        Intent intent = new Intent(HomeActivity.this, PhotoActivity.class);
+        String shitName = "";
+        try {
+            if(name!=null){
+                int face_num = (int) name.getJSONObject("result").get("face_num");
+                JSONArray jsonArray = name.getJSONObject("result").getJSONArray("face_list");
+                for (int i =0; i < face_num; i++) {
+                    String who = ((JSONObject) ((JSONObject) jsonArray.get(i)).getJSONArray("user_list").get(0)).getString("user_id");
+                    if(nameMap.get(who)!=null){
+                        shitName = shitName + "," + nameMap.get(who);
+                    }
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Intent intent = new Intent(HomeActivity.this, WebActivity.class);
+        intent.putExtra("name",shitName);
         startActivity(intent);
     }
 
@@ -382,10 +476,27 @@ public class HomeActivity extends AppCompatActivity {
             public void run() {
                 try {
                     JSONObject jsonObject = AipFaceUtils.multiSearch(fileBuf);
+                    name = jsonObject;
                     bitmap = MarkFaces.markFaces(jsonObject, bitmap);
                     Log.d("TAG", "uploadImage: " + jsonObject);
                     Message msg=new Message();
                     msg.what=1;
+                    handler.sendMessage(msg);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
+    }
+
+    public void makeCertificationPhoto(View view) {
+        new Thread() {
+            @Override
+            public void run() {
+                try {
+                    bitmap = AipBodyUtils.getCertificationPhoto(fileBuf);
+                    Message msg = new Message();
+                    msg.what = 1;
                     handler.sendMessage(msg);
                 } catch (Exception e) {
                     e.printStackTrace();
