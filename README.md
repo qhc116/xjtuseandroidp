@@ -74,48 +74,48 @@ class NameUtile
   ```
   
 ### 百度SDK
--
-  ```
-  class AipFaceHelper
-  ```
+```
+class AipFaceHelper
+```
 - 类方法:
-  ```
-  //调用M:N search并获得JSON结果
-  public JSONObject nMatch(String base_data)
-  //更新百度人脸库，添加新的用户
-  public boolean updateUser(String base_data, int num)
-  //获取当前人脸中用户数量
-  public int getUserListLenth()
-  ```
+
+```
+//调用M:N search并获得JSON结果
+public JSONObject nMatch(String base_data)
+//更新百度人脸库，添加新的用户
+public boolean updateUser(String base_data, int num)
+//获取当前人脸中用户数量
+public int getUserListLenth()
+```
  
 ## 数据类
 
 ### PictureList
 - 图片相关数据存储
 
-  ```
-  class PictureList
-  ```
+```
+class PictureList
+```
+
 - 类属性:
 
 ```
-    private Bitmap bitmap;//位图数据
-    private String userField;//图片所属用户
-    private String id;//数据库中资源id
-    private String resultJson;//M:N搜索结果
-	private Date dataInfo;//日期信息
-	```
-- 类方法
-
+private Bitmap bitmap;//位图数据
+private String userField;//图片所属用户
+private String id;//数据库中资源id
+private String resultJson;//M:N搜索结果
+private Date dataInfo;//日期信
 ```
-  public String getResultJson()
-  public void setResultJson(String resultJson)
-  public String getDateInfo()
-  public void setDateInfo(String dateInfo)
-  public String getId()
-  public void setId(String id)
-  public String getUserField()
-  public void setUserField(String userField)
-  public Bitmap getBitmap()
-  ```
+- 类方法
+```
+public String getResultJson()
+public void setResultJson(String resultJson)
+public String getDateInfo()
+public void setDateInfo(String dateInfo)
+public String getId()
+public void setId(String id)
+public String getUserField()
+public void setUserField(String userField)
+public Bitmap getBitmap()
+```
 
