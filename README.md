@@ -13,7 +13,9 @@
 - 亮点
 
 使用redis、jwt、mongodb配合做用户验证、接口授权、登录信息过期、加密加盐存储用户密码。
+
 使用service请求授权接口实时认证用户信息是否异地登录，如果异地登录，发送广播清空所有Activity任务栈。
+
 - 坑
 
 1.express路有前需要拦截所有restful请求。此处对next和回调函数理解不足，导致拦截方面卡了很久。
@@ -59,8 +61,9 @@
 # 安卓端
 
 ## 使用到的组件或技术
-四大组件：Activity、BroadcastReceiver、ContentProvider、Service、 WebView、 第三方内核、 
-轮播图、RecyclerView、SQLite、百度SDK、SharePrefrernce、OkHttp、Canvas、Decorator	
+四大组件：Activity、BroadcastReceiver、ContentProvider、Service
+
+WebView、第三方内核、轮播图、RecyclerView、SQLite、百度SDK、SharePrefrernce、OkHttp、Canvas、Decorator	
 
 ## 登录注册
 - 使用OkHttp调用后端接口，完成登录、注册功能
