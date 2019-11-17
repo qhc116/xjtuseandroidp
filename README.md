@@ -17,6 +17,7 @@
 - 坑
 
 1.express路有前需要拦截所有restful请求。此处对next和回调函数理解不足，导致拦截方面卡了很久。
+
 2.无法外部访问阿里云上安装的redis，见小组成员简书
 > https://www.jianshu.com/p/011dcec5e31e
 ## 3.坑：mongoose创建的数据找不到
