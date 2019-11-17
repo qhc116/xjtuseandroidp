@@ -31,7 +31,6 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:testOnly="true"
         android:theme="@style/Theme.AppCompat.Light" >
         <activity
             android:name="com.baidu.aip.fl.MainActivity"
@@ -68,15 +67,11 @@
         </activity>
         <activity android:name="com.example.myapplication.SearchAllstar.WebActivity" />
         <activity android:name="com.example.myapplication.SearchAllstar.githubActivity" />
-        <activity android:name="com.example.myapplication.LoginRegisterPage.Broadcast.BaseActicity" />
         <activity android:name="com.example.myapplication.ImageShower" />
 
         <provider
             android:name="com.example.myapplication.ImageProvider"
             android:authorities="cn.drake.imageprovider" />
-
-        <service android:name="com.example.myapplication.LoginRegisterPage.Broadcast.Myservice" />
-        <service android:name="com.example.myapplication.SearchAllstar.Myservice" />
     </application>
 
 </manifest>
