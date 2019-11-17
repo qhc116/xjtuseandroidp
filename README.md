@@ -16,10 +16,12 @@
 使用service请求授权接口实时认证用户信息是否异地登录，如果异地登录，发送广播清空所有Activity任务栈。
 - 坑
 
-express路有前需要拦截所有restful请求。此处对next和回调函数理解不足，导致拦截方面卡了很久。
-
+1.express路有前需要拦截所有restful请求。此处对next和回调函数理解不足，导致拦截方面卡了很久。
+2.无法外部访问阿里云上安装的redis，见小组成员简书
+> https://www.jianshu.com/p/011dcec5e31e
 ## 3.坑：mongoose创建的数据找不到
-见小组成员简书> https://www.jianshu.com/p/8767fa0ebf0a?
+见小组成员简书
+> https://www.jianshu.com/p/8767fa0ebf0a?
 
 ## 4.亮点：云相册中实现人脸排序、人脸搜索
 - 亮点
