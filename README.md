@@ -44,6 +44,7 @@
 
 跳转B站后过两秒自动报错
 原因：网页上js自动发起ajax请求B站APP特有协议视频地址"bilibili：//xxxxxx"导致loadUrl出错
+
 解决：在加载的时候要拦截所有非http、https协议的地址
 
 ## 坑1：mongoose创建的数据找不到
