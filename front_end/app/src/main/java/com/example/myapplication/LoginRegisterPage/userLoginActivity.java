@@ -20,6 +20,7 @@ import androidx.core.content.ContextCompat;
 
 import com.baidu.aip.fl.RegActivity;
 import com.example.myapplication.HomeActivity;
+//import com.example.myapplication.LoginRegisterPage.Broadcast.Myservice;
 import com.example.myapplication.R;
 
 import org.json.JSONException;
@@ -120,8 +121,10 @@ public class userLoginActivity extends AppCompatActivity {
 //                                Intent intent2=new Intent(userLoginActivity.this, Myservice.class);
 //                                intent2.putExtra("token",jsonObject.getString("msg"));
 //                                startService(intent2);
-                                String token = jsonObject.getString("msg");
 
+
+
+                                String token = jsonObject.getString("msg");
                                 //以注册直接进入，未注册需要注册
                                 if(hasRegisterFace){
                                     Intent intent = new Intent(userLoginActivity.this, HomeActivity.class);
@@ -135,23 +138,7 @@ public class userLoginActivity extends AppCompatActivity {
                                     startActivity(intent);
                                 }
 
-
-
-
-                                //
-
-
-
-
                                 userLoginActivity.this.finish();
-
-
-
-
-
-
-
-
 
                             } else {
                                 Message msg = new Message();
@@ -159,8 +146,6 @@ public class userLoginActivity extends AppCompatActivity {
                                 Bundle bundle = new Bundle();
                                 bundle.putString("ret", "用户名或密码错误");
                                 msg.setData(bundle);
-                                LoginNameText.setText("");
-                                LoginPasswordText.setText("");
                                 handler.sendMessage(msg);
                             }
 
@@ -204,9 +189,12 @@ public class userLoginActivity extends AppCompatActivity {
                 //处理图片新加入的更新
                 case 1:
                     Bundle data = msg.getData();
+                    LoginNameText.setText("");
+                    LoginPasswordText.setText("");
                     String toToast = data.getString("ret");
                     Toast.makeText(userLoginActivity.this, toToast, Toast.LENGTH_SHORT).show();
                 case 2:
+
             }
         }
     };

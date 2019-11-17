@@ -17,7 +17,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -80,7 +79,6 @@ public class YunDiskActivity extends AppCompatActivity {
     private OkHttpClient client;
     private int filCount;
     private EditText editText;
-    private ImageView deleteIv;
     private String username;
 
     //是否需要刷新
@@ -102,6 +100,7 @@ public class YunDiskActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
     private NavigationView navigationView;
     private ExplosionField explosionField;
+    private String date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -174,7 +173,10 @@ public class YunDiskActivity extends AppCompatActivity {
                         resetLayout(rv);
                         break;
                     case R.id.menu_return:
+                        String username = getIntent().getStringExtra("username");
                         Intent intent = new Intent(YunDiskActivity.this, HomeActivity.class);
+                        intent.putExtra("username", username);
+                        intent.putExtra("token", token);
                         startActivity(intent);
                         break;
                 } return true;
@@ -245,7 +247,7 @@ public class YunDiskActivity extends AppCompatActivity {
                     //没有checkbox被勾选时退出多选状态
                     if (!mAdapter.hasItemSelected()) {
                         multiSelectStatus = false;
-                        deleteIv.setVisibility(View.GONE);
+
                     }
 
                 } else {
@@ -278,7 +280,7 @@ public class YunDiskActivity extends AppCompatActivity {
             public boolean onItemLongClick(BaseQuickAdapter adapter, View view, int position) {
                 //第一次长按激活勾选功能
                 if (!multiSelectStatus) {
-                    deleteIv.setVisibility(View.VISIBLE);
+
                     mAdapter.setBooleanList(position, true);
 
                     adapter.notifyItemChanged(position);
@@ -318,7 +320,7 @@ public class YunDiskActivity extends AppCompatActivity {
 
         editText = (EditText) findViewById(R.id.etx);
 
-        deleteIv = (ImageView) findViewById(R.id.deleteIv);
+        date = "2019年11月17日";
 
         username = getIntent().getStringExtra("username");
 
@@ -341,16 +343,18 @@ public class YunDiskActivity extends AppCompatActivity {
                     String id = data.getString("id");
                     String dateInfo = data.getString("date");
                     String resultJson = data.getString("resultJson");
+
+//                    Log.i("resultJson", "...."+resultJson);
                     PictureList newPicture = new PictureList(buf);
                     newPicture.setUserField(faceUser);
                     newPicture.setId(id);
                     newPicture.setDateInfo(dateInfo);
                     newPicture.setResultJson(resultJson);
-//                    Log.i("resultJson", "...."+resultJson);
-
                     pictureLists.add(newPicture);
-                    mAdapter.notifyItemInserted(pictureLists.size());
                     Id2Pic.put(id, pictureLists.size()-1);
+
+                    mAdapter.notifyItemInserted(pictureLists.size());
+
                     break;
                     //modify
                 case DELETE_FAIL:
@@ -429,6 +433,7 @@ public class YunDiskActivity extends AppCompatActivity {
                         //获取数据库中的id信息
                         String id = jsonObject.getString("_id");
                         //获得日期信息
+
                         try {
                             Date dateInfo = sdf.parse(jsonObject.getString("dateinfo"));
                             datesOrder.put(id, dateInfo);
@@ -452,10 +457,12 @@ public class YunDiskActivity extends AppCompatActivity {
                         //获取resultJson
                         String resultJson = jsonObject.getString("resultJson");
 
+
                         data1.putString("resultJson", resultJson);
                         data1.putString("value", data);
                         data1.putString("id", id);
                         data1.putString("user", faceUser);
+
 
                         msg.what = DOWNLOAD_SUCCESS;
                         msg.setData(data1);
@@ -589,7 +596,6 @@ public class YunDiskActivity extends AppCompatActivity {
         //删除会导致退出多选状态
         if(!mAdapter.hasItemSelected())
             multiSelectStatus = false;
-        deleteIv.setVisibility(View.GONE);
 
         if(y == 0){
             Toast.makeText(YunDiskActivity.this, "没有要删除的元素", Toast.LENGTH_SHORT).show();
@@ -657,10 +663,17 @@ public class YunDiskActivity extends AppCompatActivity {
                 }
             }
             //以id取出对应资源所在位置
-            int OldIndex = Id2Pic.get(item.getKey());
-            //按新的顺序修改id记录的资源位置
-            Id2Pic.put(item.getKey(), newIndex++);
-            pictureLists.add(pictureLists.get(OldIndex));
+            Integer temp = Id2Pic.get(item.getKey());
+            int OldIndex = 0;
+
+                OldIndex = temp;
+                Log.i(".....---------", "Integer");
+                //按新的顺序修改id记录的资源位置
+                Id2Pic.put(item.getKey(), newIndex++);
+                pictureLists.add(pictureLists.get(OldIndex));
+
+
+
         }
         if (startIndex > 0) {
             pictureLists.subList(0, startIndex).clear();

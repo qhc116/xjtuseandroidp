@@ -1,19 +1,19 @@
 package com.example.myapplication;
 
-import android.app.Activity;
 import android.content.ContentResolver;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Base64;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ResultActivity extends Activity {
+public class ResultActivity extends AppCompatActivity {
 
     private List<PictureList> pictureLists;
     private RecyclerView rv;

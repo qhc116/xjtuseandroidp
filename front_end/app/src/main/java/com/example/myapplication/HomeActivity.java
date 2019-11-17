@@ -286,7 +286,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void upload(View view) throws JSONException {
-        if(base64_data.isEmpty()){
+        if(base64_data==null){
             Toast.makeText(HomeActivity.this, "请先选择照片再上传", Toast.LENGTH_LONG).show();
             return;
         }
